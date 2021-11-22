@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <link rel="shortcut icon" href="../img/svg/favicon.ico" type="image/x-icon">  
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <script src="https://kit.fontawesome.com/d5ff9e6164.js" crossorigin="anonymous"></script>
+  <title>Gamifiwork - Trivia Ruleta(4)</title>
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="css/ruleta.css">
+  <style>
+    .selector-for-some-widget {
+      box-sizing: content-box;
+    }
+
+    .button4 {
+      background-color: #FF395B;
+      border: none;
+      color: white;
+      padding: 10px 20px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 15px;
+      border-radius: 12px;
+
+    }
+
+    .button3 {
+      background-color: #F29D39;
+      border: none;
+      color: white;
+      padding: 10px 20px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 15px;
+      border-radius: 12px;
+    }
+  </style>
+</head>
+
+<body>
+  <br><br>
+  <div class="container">
+    <div class="row">
+      <div class="col col-lg-3">
+        <div id="premio"><br><br>
+          
+          <table style="margin: 0 auto;">
+            <tr>
+              <p class="elige">Haz click sobre la ruleta: </p>
+              <!-- <p class="contador">TURNOS:0</p> -->
+            </tr>  
+          </table>
+
+        </div>
+      </div>
+      <div class="col-md-auto">
+        <div class="vara"></div>
+        <div>
+          <img class="img-fluid" src="image/ruleta4x.png" id="ruleta">
+        </div>
+        <div>
+          <div id="sonido" style="display: none;">
+            <iframe id="audio" src="">
+            </iframe>
+          </div>
+        </div>
+
+      </div>
+      <div class="col">
+        <div class="trivias">
+          <table class="table table-striped">
+            <thead class="thead-dark ">
+              <tr>
+                <th scope="col">Icono</th>
+                <th scope="col">Trivias</th>
+              </tr>
+            </thead>   
+              <tr>
+                <th scope="row"><i class="far fa-heart"></i></th>
+                <td>
+                  <select class="custom-select" id="listado">
+                    <option id="result1" selected disabled></option>
+                  </select>
+                </td>
+              </tr>
+              <tr>
+                <th scope="row"><i class="fas fa-search"></i></th>
+                <td>
+                  <select class="custom-select" id="listado1">
+                    <option id="result2" selected disabled></option>
+                  </select>
+                </td>
+              </tr>
+              <tr>
+                <th scope="row"><i class="fas fa-home"></i></th>
+                <td>
+                  <select class="custom-select" id="listado2">
+                    <option id="result3" selected disabled></option>
+                  </select>
+                </td>
+              </tr>
+              <tr>
+                <th scope="row"><i class="far fa-paper-plane"></i></th>
+                <td>
+                  <select class="custom-select" id="listado3">
+                    <option id="result4" selected disabled></option>
+                  </select>
+                </td>
+              </tr>             
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="reproductorc" style="display: none;">
+    <!-- <audio controls autoplay class="audio" nodownload id="reproductor">
+        <source src="" type="audio/mp3">
+    </audio> -->
+  </div>
+
+  <script src="js/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+  <script src="js/scriptR4.js"></script>
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+    crossorigin="anonymous"></script>
+  <script src="../socket.io/socket.io.js"></script>
+  <script src="../js/ruleta4_start.js"></script>
+</body>
+
+</html>

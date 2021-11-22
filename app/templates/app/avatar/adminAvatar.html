@@ -1,0 +1,203 @@
+{% extends 'app/base.html' %}
+{% load static %}
+{% block js %}
+<script>
+    function eliminar(id){      
+        Swal.fire({
+        "title": "¿Estas seguro?",
+        "text": "La acción que esta apunto de cometer, es irreversible",
+        "icon": "warning",
+        "showCancelButton": true,
+        "confirmButtonColor": "#FD5151 ",
+        "cancelButtonColor": "#F99C56 ",
+        "confirmButtonText": "Si, Eliminar",
+        "reverseButtons":true,
+        }).then(function(result) {
+        if (result.isConfirmed) {
+        window.location.href = "/eliminarAvatar/"+id+"/"    
+        Swal.fire(
+        "☺ Eliminado!",
+        "Su fila a sido eliminada exitosamente",
+        "success",
+        )
+        }
+        })
+    }
+</script>
+{% endblock %}
+{% block css %}
+<script src="https://kit.fontawesome.com/d5ff9e6164.js" crossorigin="anonymous"></script>
+<style>
+    #main-container {
+        margin: 150px auto;
+        width: 600px;
+      }
+    .imagen{
+        width: 50px;
+        height: 50px;
+    }
+      table {
+        align-items: left;
+        background-color: white;
+        border-collapse: collapse;
+        font-family: 'Segoe UI';
+        width: 100%;
+        box-shadow: 0 0 20px rgb(163, 163, 163);
+        padding: 50%;
+      }
+      td,
+      th {
+        padding: 20px;
+      }
+      thead {
+        background-color: #f29d39;
+        color: white;
+        border-bottom: rgb(255, 90, 61) 5px solid;
+        text-align: left;
+      }
+    
+      main {
+        padding: 1em 2em;
+      }
+    
+      .centrado {
+        text-align: center;
+      }
+    
+      .colorx {
+        color: grey;
+      }
+    
+     tr:nth-child(even){
+         background-color: #ddd;      
+     }
+    
+     tr:hover td{
+         background-color: #fcb7c1;
+     }
+    
+     @media (max-width: 45em){
+            table{
+                width:  100%;
+                font-size:100%;
+            }
+            table td, table th {
+                border: none;
+                text-align: center;
+            }
+            table tr{
+                display: flex;
+                flex-direction: column;
+                border: 1px solid grey;
+                padding: 1em solid grey;            
+            }
+            table td[data-titulo]{
+                display: flex;
+            }
+            table td[data-titulo]::before{
+                content: attr( data-titulo );
+                width: 100px;
+                color: rgb(82, 81, 81);
+                font-weight: bold;
+            }
+            table thead{
+                display:none;
+            }
+    }
+    .derecha{text-align: right;padding: 0%;}
+    .button4 {
+    background-color: #FF395B; 
+      border: none;
+      color: white;
+      padding: 10px 20px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 15px;
+      border-radius: 12px;
+    }
+    
+    /*paginación*/
+    ul.pagination {
+        display: inline-block;
+        padding: 0;
+        margin: 0;
+    }
+    
+    ul.pagination li {display: inline;}
+    
+    ul.pagination li a {
+        color: black;
+        float: left;
+        padding: 8px 16px;
+        text-decoration: none;
+        border-radius: 5px;
+    }
+    
+    ul.pagination li a.active {
+        background-color: #FF395B;
+        color: white;
+        border-radius: 5px;
+    }
+    
+    ul.pagination li a:hover:not(.active) {background-color: #ddd;}
+    </style>
+{% endblock %}
+{% block contenido %}
+
+<div class="card">
+    <h1 class="main-title">Administrar Avatar  <div class="derecha">
+        <a  href="{% url 'registroAvatar' %}"><button class="button4"><i class="fas fa-plus-circle"></i>&nbsp;&nbsp;&nbsp;Agregar nuevo Avatar</button></h1></a>
+    <div>    
+    <table class="table table-striped table-hover table-responsive-sm">
+        <thead>
+        <tr>
+        <th>ID</th>
+        <th>Nombre</th>
+        <th>Avatar</th>
+        <th>Acción</th>
+        </tr>
+        </thead>
+    {% for a in page_obj %}
+    
+    
+    <tr>
+        <td data-titulo="ID">{{ a.id }}</td>
+        <td data-titulo="Nombre">{{ a.nombre | title }}</td>
+        {% if a.avatar %}
+        <td data-titulo="Avatar"><img src="{{ a.avatar.url }}" class="imagen" alt=""></td>
+        {% else %}
+        <img src="{% static '/app/img/avatar/no-image.png' %}" class="no-imagen" alt="">
+        
+        {% endif %}
+        <td data-titulo="Acción" class="centrado">
+            <a href="{% url 'modificarAvatar' a.id %}" class="fas fa-edit colorx"></a>
+            <a href="#" onclick="eliminar({{ a.id }})" class="fas fa-trash colorx"></a>
+        </td>    
+    </tr>
+    {% endfor %}
+    </table>
+<br>
+    <div class="centrado">
+        <ul class="pagination">
+            {% include 'app/paginator.html' %}
+        </ul>
+    </div>
+</div><br>
+
+<div class="card">
+    
+    <form method="get" class="derecha sign-up-form form">
+        <div class="form-label justify-content-md-center">
+            <div class="col form-label ">
+                <h3><strong>Herramienta de filtro:</strong></h3>
+                {{ filtered_avatar.form.as_p }}
+            </div>
+         
+         <div class="derecha">  
+         <input type="submit" value="Buscar" class="form-btn button4" style="padding: 3px; border-radius: 20px;">
+        </div></div>           
+    </form>   
+</div>
+
+{% endblock %}

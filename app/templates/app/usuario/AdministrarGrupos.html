@@ -1,0 +1,188 @@
+{% extends 'app/base.html' %}
+{% load static %}
+{% block js %}
+<script src="https://kit.fontawesome.com/d5ff9e6164.js" crossorigin="anonymous"></script>
+<script>
+    function eliminar(id){      
+        Swal.fire({
+        "title": "¿Estas seguro?",
+        "text": "La acción que esta apunto de cometer, es irreversible",
+        "icon": "warning",
+        "showCancelButton": true,
+        "confirmButtonColor": "#FD5151 ",
+        "cancelButtonColor": "#F99C56 ",
+        "confirmButtonText": "Si, Eliminar",
+        "reverseButtons":true,
+        }).then(function(result) {
+        if (result.isConfirmed) {
+        window.location.href = "/EliminarGrupo/"+id+"/"    
+        Swal.fire(
+        "☺ Eliminado!",
+        "Su fila a sido eliminada exitosamente",
+        "success",
+        )
+        }
+        })
+    }
+</script>
+
+{% endblock %}
+{% block css %}
+<style>
+    #main-container {
+        margin: 150px auto;
+        width: 600px;
+      }
+    
+      table {
+        align-items: left;
+        background-color: white;
+        border-collapse: collapse;
+        font-family: 'Segoe UI';
+        width: 100%;
+        box-shadow: 0 0 20px rgb(163, 163, 163);
+        padding: 50%;
+      }
+      td,
+      th {
+        padding: 20px;
+      }
+      thead {
+        background-color: #f29d39;
+        color: white;
+        border-bottom: rgb(255, 90, 61) 5px solid;
+        text-align: left;
+      }
+    
+      main {
+        padding: 1em 2em;
+      }
+    
+      .centrado {
+        text-align: center;
+      }
+    
+      .colorx {
+        color: grey;
+      }
+    
+     tr:nth-child(even){
+         background-color: #ddd;      
+     }
+    
+     tr:hover td{
+         background-color: #fcb7c1;
+     }
+    
+     @media (max-width: 45em){
+            table{
+                width:  100%;
+                font-size:100%;
+            }
+            table td, table th {
+                border: none;
+                text-align: center;
+            }
+            table tr{
+                display: flex;
+                flex-direction: column;
+                border: 1px solid grey;
+                padding: 1em solid grey;            
+            }
+            table td[data-titulo]{
+                display: flex;
+            }
+            table td[data-titulo]::before{
+                content: attr( data-titulo );
+                width: 100px;
+                color: rgb(82, 81, 81);
+                font-weight: bold;
+            }
+            table thead{
+                display:none;
+            }
+    }
+    .derecha{text-align: right;padding: 0%;}
+    .button4 {
+    background-color: #FF395B; 
+      border: none;
+      color: white;
+      padding: 10px 20px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 15px;
+      border-radius: 12px;
+    }
+    
+    /*paginación*/
+    ul.pagination {
+        display: inline-block;
+        padding: 0;
+        margin: 0;
+    }
+    
+    ul.pagination li {display: inline;}
+    
+    ul.pagination li a {
+        color: black;
+        float: left;
+        padding: 8px 16px;
+        text-decoration: none;
+        border-radius: 5px;
+    }
+    
+    ul.pagination li a.active {
+        background-color: #FF395B;
+        color: white;
+        border-radius: 5px;
+    }
+    
+    ul.pagination li a:hover:not(.active) {background-color: #ddd;}
+    </style>
+{% endblock %}
+{% block contenido %}
+<div>
+<h1 class="main-title">Administrar Grupos<div class="derecha">
+    <a  href="{% url 'CrearGrupos' %}"><button class="button4">Agregar grupo</button>
+    <a  href="{% url 'AsignarPermisosGrupos' %}"><button class="button4">Asignar permisos a grupos</button></h1></div></a>
+<div>
+    
+    <table>
+        <thead>
+            <tr>
+                <th>Nombre</th>  
+                <th class="centrado">Acción</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for grupo in grupo %}
+            <tr>
+                <td data-titulo="Nombre">{{grupo.name}}</td>
+                <td class="centrado">
+                   <a href="{% url 'ModificarGrupo' grupo.id %}" class="fas fa-edit colorx"></a> 
+                   <a href="#" onclick="eliminar({{ grupo.id }})" class="fas fa-trash colorx"></a>
+                </td>
+            </tr>    
+            {% endfor %}        
+        </tbody>
+    </table>
+</div>
+
+<br>
+
+<div class="centrado">
+    <ul class="pagination">
+        <li><a href="#">«</a></li>
+        <li><a class="active" href="#">1</a></li>
+        <li><a href="#">2</a></li>
+        <li><a href="#">3</a></li>
+        <li><a href="#">4</a></li>
+        <li><a href="#">5</a></li>
+        <li><a href="#">6</a></li>
+        <li><a href="#">7</a></li>
+        <li><a href="#">»</a></li>
+    </ul>
+</div>
+</div>    
+{% endblock %}

@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Partida Trivia Gamifiwork</title> 
+        <link rel = "stylesheet" href = "../../css/hostGameView.css">
+        <link rel="stylesheet" href="../../css/style.css">
+        <link rel="stylesheet" href="../../css/style.min.css">  
+        <link rel="shortcut icon" href="../img/svg/favicon.ico" type="image/x-icon"> 
+        <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
+        <!-- FontAwesome CDN Link for Icons -->
+        <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+    </head>
+    <body class="cuerpo">        
+            
+            <!-- <h3 id = "timerText">Tiempo Restante:<span id = "num"> 20</span></h3> -->
+        <header>
+            <!-- <h4 id = "questionNum">Pregunta 1 / x</h4> -->
+            <h4 id = "playersAnswered">Jugadores Listos: 0 / x</h4>
+            <div class="timer" id="timer">
+                <div id = "timerText" class="time_text">Tiempo Restante</div>
+                <div id = "num" class="timer_sec"></div>
+            </div> 
+            <button onclick = "RankEquipo()" id = "RankEquipo">Ranking Equipos</button>
+            <button onclick = "RankIndividual()" id = "RankIndividual">Ranking Individual</button>
+        </header> 
+
+        
+        
+        <div class="container">
+            <!-- <div class = "square" id = "square1"></div>
+            <div class = "square" id = "square2"></div>
+            <div class = "square" id = "square3"></div>
+            <div class = "square" id = "square4"></div> -->
+            
+            <h2 id = "question"><!-- Pregunta --></h2>
+            <br>
+            <h3 id = "answer1"><!-- Respuesta --></h3>
+            <br>
+            <h3 id = "answer2"><!-- Respuesta --></h3>
+            <br>
+            <h3 id = "answer3"><!-- Respuesta --></h3>
+            <br>
+            <h3 id = "answer4"><!-- Respuesta --></h3>
+            
+            <br>
+            <button onclick = "nextQuestion()" id = "nextQButton">Siguiente Pregunta</button>
+            <a href='http://127.0.0.1:8000/partida/' class="nuevo">Crear nueva partida</a>
+            <!-- <a href='http://52.5.26.113/partida/' class="nuevo">Crear nueva partida</a> -->
+            <br>
+                
+            <div id="reproductorc">
+                <!-- <audio controls autoplay class="audio" nodownload id="reproductor">
+                    <source src="" type="audio/mp3">
+                </audio> -->
+            </div>
+            
+            <table class="content-table" id="REquipo">
+                <thead>
+                    <tr>
+                        <th colspan="3">
+                            <h2>Resultado parcial por equipos</h2>
+                        </th>
+                    </tr>
+                    <tr>
+                        <th>Posición</th>
+                        <th>Equipo</th>
+                        <th>Puntos</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="active-row">
+                        <td>1. <i id="icon" class="fas fa-crown"></i></td>
+                        <td id=RNom1></td>
+                        <td id=RPtos1></td>
+                    </tr>
+                    <tr>
+                        <td>2.</td>
+                        <td id=RNom2></td>
+                        <td id=RPtos2></td>
+                    </tr>                   
+                </tbody>
+            </table>
+
+            <table class="content-table" id="RParcial">
+                <thead>
+                    <tr>
+                        <th colspan="3">
+                            <h2>Resultado parcial</h2>
+                        </th>
+                    </tr>
+                    <tr>
+                        <th>Posición</th>
+                        <th>Nombre</th>
+                        <th>Puntos</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="active-row">
+                        <td>1. <i id="icon" class="fas fa-crown"></i></td>
+                        <td id=rankingNom1></td>
+                        <td id=rankingPtos1></td>
+                    </tr>
+                    <tr>
+                        <td>2.</td>
+                        <td id=rankingNom2></td>
+                        <td id=rankingPtos2></td>
+                    </tr>
+                    <tr>
+                        <td>3.</td>
+                        <td id=rankingNom3></td>
+                        <td id=rankingPtos3></td>
+                    </tr>
+                    <tr>
+                        <td>4.</td>
+                        <td id=rankingNom4></td>
+                        <td id=rankingPtos4></td>
+                    </tr>
+                    <tr>
+                        <td>5.</td>
+                        <td id=rankingNom5></td>
+                        <td id=rankingPtos5></td>
+                    </tr>
+                </tbody>
+            </table>
+
+
+            <table class="content-table" id="RFinal">
+                <thead>
+                    <tr>
+                        <th colspan="3">
+                            <h2>Resultado final individual</h2>
+                        </th>
+                    </tr>
+                    <tr>
+                        <th>Posición</th>
+                        <th>Nombre</th>
+                        <th>Puntos</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="active-row">
+                        <td>1. <i id="icon" class="fas fa-crown"></i></td>
+                        <td id=rankingNom1F></td>
+                        <td id=rankingPtos1F></td>
+                    </tr>
+                    <tr>
+                        <td>2.</td>
+                        <td id=rankingNom2F></td>
+                        <td id=rankingPtos2F></td>
+                    </tr>
+                    <tr>
+                        <td>3.</td>
+                        <td id=rankingNom3F></td>
+                        <td id=rankingPtos3F></td>
+                    </tr>
+                    <tr>
+                        <td>4.</td>
+                        <td id=rankingNom4F></td>
+                        <td id=rankingPtos4F></td>
+                    </tr>
+                    <tr>
+                        <td>5.</td>
+                        <td id=rankingNom5F></td>
+                        <td id=rankingPtos5F></td>
+                    </tr>
+                </tbody>
+            </table>
+            <br>
+            <br>
+            <table class="content-table" id="REquipoF">
+                <thead>
+                    <tr>
+                        <th colspan="3">
+                            <h2>Resultado final por equipos</h2>
+                        </th>
+                    </tr>
+                    <tr>
+                        <th>Posición</th>
+                        <th>Equipo</th>
+                        <th>Puntos</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="active-row">
+                        <td>1. <i id="icon" class="fas fa-crown"></i></td>
+                        <td id=RNom1F></td>
+                        <td id=RPtos1F></td>
+                    </tr>
+                    <tr>
+                        <td>2.</td>
+                        <td id=RNom2F></td>
+                        <td id=RPtos2F></td>
+                    </tr>                   
+                </tbody>
+            </table>
+
+
+
+            
+        
+        </div>
+        <script src="https://sh20raj.github.io/AudiPlay/audiplay.js"></script>
+        <script src = "../../socket.io/socket.io.js"></script>
+        <script src = "../../js/libs/jqueryLibrary.js"></script>
+        <script src = "../../js/libs/deparam.js"></script>
+        <script src = "../../js/hostGame.js"></script>
+        <script src="../../js/script.js"></script>
+    </body>
+</html> 

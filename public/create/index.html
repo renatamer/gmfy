@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="shortcut icon" href="../img/svg/favicon.ico" type="image/x-icon">  
+        <title>Iniciar Partida Gamifiwork</title>
+        <link rel="stylesheet" href = "../css/create.css">
+        <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
+        <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css"
+        integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk="
+        crossorigin="anonymous"
+        />
+    </head>
+    <body>
+        
+        <div class="wrapper">
+            <!-- <a id = "back"href = "../">Atras</a> -->
+            <div class="links">
+                <ul>
+                    <li data-view="list-view" class="li-list">
+                    <i class="fas fa-th-list"></i>
+                    Listado de Partidas</li>
+                </ul>
+            </div>
+
+            <div style="text-align: center;">
+                <label style="color: black;">¿Es una partida de equipos?</label> <b><p style="color: black;" id="demo"></p></b>
+                <br>
+                <button class="boton" onclick="cambiar()" value="No" id="cambiar">Modificar</button>
+                <br><br>
+            </div>
+
+            <div class="view_main">
+                <div class="view_wrap grid-view" style="display: block;" id = "game-list">
+                    <!-- LISTADO DE PARTIDAS -->
+                </div>
+            </div>
+        </div>  
+
+        <script> 
+        
+        </script>
+        
+        <script src = "../socket.io/socket.io.js"></script>
+        <script src = "../js/create.js"></script>
+    </body>
+</html>

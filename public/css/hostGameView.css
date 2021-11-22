@@ -1,0 +1,313 @@
+.cuerpo {
+    -webkit-animation: bgcolor 20s infinite;
+    animation: bgcolor 10s infinite;
+    -webkit-animation-direction: alternate;
+    animation-direction: alternate;
+    background-color: #11111d;
+}
+
+#answer1{
+    background-color: #4CAF50;
+    margin: auto;
+    padding: 30px 20px;
+    height: 50%;
+    font-family: 'Nunito', sans-serif;
+    font-size: 20px;
+    color: white;
+}
+#answer2{
+    background-color: #f94a1e;
+    margin: auto;
+    padding: 30px 20px;
+    height: 50%;
+    font-family: 'Raleway', sans-serif;
+    font-size: 20px;
+    color: white;
+}
+#answer3{
+    background-color: #3399ff;
+    margin: auto;
+    padding: 30px 20px;
+    height: 50%;
+    font-family: 'Raleway', sans-serif;
+    font-size: 20px;
+    color: white;
+}
+#answer4{
+    background-color: #ff9933;
+    margin: auto;
+    padding: 30px 20px;
+    height: 50%;
+    font-family: 'Raleway', sans-serif;
+    font-size: 20px;
+    color: white;
+}
+.square{
+    border: none;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: none;
+    font-size: 16px;
+    margin: 4px 2px;
+    width: 70px;
+    height: 0px;
+    font-size: 20px;    
+}
+
+#square1{
+    background-color: #4CAF50;
+}
+#square2{
+    background-color: #f94a1e;
+}
+#square3{
+    background-color: #3399ff;
+}
+#square4{
+    background-color: #ff9933;
+}
+
+#nextQButton{
+    display: none;
+    background-color: #F29D39;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 15px;
+    border-radius: 12px;
+}
+
+#RankEquipo{
+    display: none;
+    background-color: #F29D39;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 15px;
+    border-radius: 12px;
+}
+
+#RankIndividual{
+    display: none;
+    background-color: #F29D39;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 15px;
+    border-radius: 12px;
+}
+
+.nuevo{
+    display: none;
+    background-color: #F29D39;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 15px;
+    border-radius: 12px;
+    width: fit-content;
+}
+
+#question{
+    margin-top: 90px;
+    margin-bottom: 50px;
+    font-family: 'Raleway', sans-serif;
+    color: white;
+}
+#timerText{
+    font-family: 'Raleway', sans-serif;
+}
+#num{
+    font-family: 'Tajawal', sans-serif;
+    font-size: 30px;
+}
+#playersAnswered{
+    font-family: 'Tajawal', sans-serif;   
+    color: white; 
+}
+#questionNum{
+    font-family: 'Tajawal', sans-serif;    
+    color: white;
+}
+
+#winner1{
+    font-family: 'Raleway', sans-serif;
+    text-align: center;
+    font-size: 30px;
+    display: none;
+    color: white;
+}
+#winner2{
+    font-family: 'Raleway', sans-serif;
+    text-align: center;
+    font-size: 22px;
+    display: none;
+    color: white;
+}
+#winner3{
+    font-family: 'Raleway', sans-serif;
+    text-align: center;
+    font-size: 20px;
+    display: none;
+    color: white;
+}
+#winner4{
+    font-family: 'Raleway', sans-serif;
+    text-align: center;
+    display: none;
+    color: white;
+}
+#winner5{
+    font-family: 'Raleway', sans-serif;
+    text-align: center;
+    display: none;
+    color: white;
+}
+#winnerTitle{
+    text-align: center;
+    font-family: 'Raleway', sans-serif;
+    font-size: 35px;
+    color: #3399ff;
+    display: none;
+    color: white;
+}
+
+/* Contador de tiempo */
+
+header{
+    position: relative;
+    z-index: 99;
+    height: 70px;
+    padding: 0 30px;
+    background: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-radius: 5px 5px 0 0;
+    box-shadow: 0px 3px 5px 1px rgba(0, 0, 0, 0.1);
+    background-color: #161624;
+}
+
+header .timer{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 215px;
+    height: 45px;
+    background: #cce5ff;
+    border: 1px solid #b8daff;
+    border-radius: 5px;
+    padding: 0 8px;
+}
+
+header .timer .time_text{
+    font-weight: 400;
+    font-size: 17px;
+    user-select: none;
+}
+
+header .timer .timer_sec{
+    font-size: 18px;
+    font-weight: 500;
+    background: #343a40;
+    height: 30px;
+    width: 45px;
+    color: #fff;
+    text-align: center;
+    line-height: 30px;
+    border-radius: 5px;
+    border: 1px solid #343a40;
+    user-select: none;
+}
+
+/* #icon{
+    text-align: center;
+    font-size: 100px;
+    color: gold;
+    margin-bottom: 10px;
+    display: none;
+} */
+
+header .time_line{
+    position: absolute;
+    bottom: 0px;
+    left: 0px;
+    height: 6px;
+    background: #FF395B;
+}
+
+.audio {
+    display: none;
+    width: 700px;
+    margin-top: 60px;
+    margin-left: 350px;
+}
+
+/* TABLA */
+
+.content-table {
+    background-color: #f3f1f1;
+    width: 400px;
+    padding: 30px 25px;
+    font-size: 1.5em;
+    position: relative;
+    transform: translate(-50%, 10%);
+    left: 50%;
+    top: 50%;
+    border-radius: 8px;
+    font-family: "Nunito", sans-serif;
+    text-align: center;
+    display: none;
+  }
+
+.content-table h2 {
+    font-size: 0.9em;
+    text-align: center;
+    color: #fff;
+}
+  
+  .content-table thead tr {
+    background-color: #FF395B;
+    color: #ffffff;
+    text-align: left;
+    font-weight: bold;
+  }
+  
+  .content-table th,
+  .content-table td {
+    padding: 12px 15px;
+  }
+  
+  .content-table tbody tr {
+    border-bottom: 1px solid #dddddd;
+  }
+  
+  .content-table tbody tr:nth-of-type(even) {
+    background-color: #f7f7f7;
+  }
+  
+  .content-table tbody tr:last-of-type {
+    border-bottom: 2px solid #F29D39;
+  }
+  
+  .content-table tbody tr.active-row {
+    font-weight: bold;
+    background-color: #e4dede;
+  }
+
+  #icon{
+    text-align: center;
+    font-size: 20px;
+    color: gold;
+    margin-bottom: 10px;
+    display: inline-block;
+}

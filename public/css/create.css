@@ -1,0 +1,137 @@
+@import url("https://fonts.googleapis.com/css2?family=Nunito:wght@200;400;600&display=swap");
+
+* {
+  list-style: none;
+  font-family: "Nunito", sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: #f7f7f7;
+  color: #f7f7f7;
+}
+
+.view_item img {
+  width: 75px;
+  height: 75px;
+}
+
+.wrapper {
+  width: 800px;
+  margin: 20px auto;
+}
+
+.links {
+  margin-bottom: 25px;
+  background: #272a3a;
+  padding: 15px;
+  border-radius: 3px;
+}
+
+.links ul {
+  display: flex;
+  justify-content: center;
+}
+
+.links ul li {
+  margin: 0 15px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.links ul li:hover,
+.links ul li.active {
+  color: #d9534f;
+}
+
+.view_main {
+  background: #272a3a;
+  border-radius: 3px;
+  padding: 15px;
+}
+
+.list-view .view_item {
+  background: #272a3a;
+  border: 1px solid #e2efe1;
+  margin: 10px;
+  padding: 10px 20px;
+  display: flex;
+  align-items: center;
+}
+
+.list-view .view_item:last-child {
+  margin-bottom: 0;
+}
+
+.list-view .view_item .vi_left {
+  margin-right: 25px;
+}
+
+.view_item {
+  background: #d9534f;
+}
+
+.view_item .title {
+  font-weight: 600;
+  color: #fff;
+}
+
+.view_item .content {
+  margin: 5px 0;
+  font-size: 14px;
+  line-height: 22px;
+  font-weight: 200;
+}
+
+.view_item .btn {
+  width: 125px;
+  background: #d9534f;
+  padding: 8px 5px;
+  border-radius: 3px;
+  color: #fff;
+  text-align: center;
+  font-weight: 200;
+  cursor: pointer;
+}
+
+.view_item .btn:hover {
+  background: #d63933;
+}
+
+.grid-view {
+  width: 100%;
+}
+
+.grid-view .view_item {
+  display: inline-block;
+  border: 1px solid #e2efe1;
+  width: 230px;
+  padding: 25px;
+  text-align: center;
+  margin: 10px;
+}
+
+.grid-view .view_item .vi_left {
+  margin-bottom: 10px;
+}
+
+.grid-view .view_item .btn {
+  margin: 0 auto;
+}
+
+.boton {
+  background-color: #f29d39;
+  border: none;
+  color: white;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  font-size: 15px;
+  border-radius: 12px;
+}
+

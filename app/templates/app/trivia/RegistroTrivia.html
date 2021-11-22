@@ -1,0 +1,67 @@
+{% extends 'app/base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block contenido %}
+<style>
+  .button4 {
+    background-color: #FF395B;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 15px;
+    border-radius: 12px;
+    
+  }
+  .button3 {
+    background-color: #F29D39;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 15px;
+    border-radius: 12px;
+  }
+</style>
+<div class="row justify-content-md-center">
+  <div class="col col-lg-3">
+    
+  </div>
+  <div class="col-md-auto">
+    <h1 class="sign-up__title">Registro de Trivia</h1>
+    <form class="sign-up-form form" action="" method="post" enctype="multipart/form-data">
+          {% csrf_token %}
+
+          <div class="row">
+            <div class="col form-label">
+              {{ form.nombre | as_crispy_field }}
+            </div>
+          </div>
+          <div class="row">
+            <div class="col form-label">
+              {{ form.icono | as_crispy_field }}
+            </div>   
+          </div>
+        <div class="row">
+            <div class="col"><br><br><br><br><br>
+              <a  href="{% url 'AdminTrivia' %}">
+                <input type="button" value="Cancelar" class="button4 form-btn">
+              </a>
+            </div>
+            &nbsp;
+            <div class="col"><br><br><br><br><br>
+              <button type="submit" id="btnEnviar" class="form-btn button3 transparent-btn">Guardar</button>
+            </div>   
+          </div>
+    </form>
+   {{mensaje}} 
+  </div>
+  <div class="col col-lg-4">
+    
+  </div>
+</div>
+{% endblock %}

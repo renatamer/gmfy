@@ -1,0 +1,122 @@
+{% extends 'app/base.html' %}
+{% load static %}
+{% block js %}
+
+<script>
+function getval() {
+  var sel = document.getElementById('format');
+
+  if (sel.value == "kahoot") {
+    window.open("http://localhost:3000/create/"); //http://52.5.26.113:3000/create/
+  } else if (sel.value == "Ruleta(4)") {
+    window.open("http://localhost:3000/ruleta/ruleta4.html");
+  } else if (sel.value == "Ruleta(6)") {
+    window.open("http://localhost:3000/ruleta/ruleta6.html");
+  }
+}
+</script>
+
+{% endblock %}
+{% block css %}
+
+<link href="https://fonts.googleapis.com/css?family=Nunito:400,600&display=swap" rel="stylesheet"> 
+
+<style>
+
+.contenedor {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    height: 80em;
+    font-family: 'Nunito', sans-serif;
+}
+
+select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    -ms-appearance: none;
+    appearance: none;
+    outline: 0;
+    box-shadow: none;
+    border: 0!important;
+    background: #F29D39;
+    background-image: none;
+    flex: 1;
+    padding: 0 .5em;
+    color: #fff;
+    cursor: pointer;
+    font-size: 1em;
+    font-family: 'Nunito', sans-serif;
+}
+
+select::-ms-expand {
+    display: none;
+}
+
+.select {
+    position: relative;
+    display: flex;
+    width: 20em;
+    height: 3em;
+    line-height: 3;
+    background: #F29D39;
+    overflow: hidden;
+    border-radius: .25em;
+    margin-bottom: 90px;
+}
+
+.select::after {
+    content: '\25BC';
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 0 1em;
+    background: #fff;
+    cursor: pointer;
+    pointer-events: none;
+    transition: .25s all ease;
+}
+
+.select:hover::after {
+    color: #F29D39;
+}
+
+#tituloMod {
+    margin-top: 200px;
+    margin-bottom: 50px;
+}
+
+.button4 {
+    background-color: #FF395B;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 15px;
+    border-radius: 12px;
+}
+
+
+
+</style>
+{% endblock %}
+{% block contenido %}
+
+<form class="contenedor">
+    <h1 id= tituloMod>Elige una modalidad de partida</h1>
+    <div class="select">
+        <select name="format" id="format">
+            <option selected disabled>Elige una modalidad</option>
+            <option value="kahoot">Modo Trivia</option>
+            <option value="Ruleta(4)">Modo Ruleta (4 Temas)</option>
+            <option value="Ruleta(6)">Modo Ruleta (6 Temas)</option>
+        </select>        
+    </div>
+    <br>
+    <input type="button" onclick="getval()" class="button4" value="Iniciar Partida">
+</form>
+
+{% endblock %}

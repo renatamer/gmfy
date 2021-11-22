@@ -1,0 +1,45 @@
+{% extends 'app/base.html' %}
+{% load static %}
+{% block js %}
+<script src="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.min.js"></script>
+<script>
+    $(document).ready(function(){
+        $('.slider').bxSlider({
+            mode: 'fade',//hotizontal, vertical,fade
+            auto: true,
+            pause: 6000
+        
+        });
+    });
+</script>
+{% endblock %}
+{% block css %}
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.css">
+{% endblock %}
+{% block contenido %}
+
+{% if usuarios.is_active %}
+<h1 class="main-title">Hola! {{ usuarios.first_name}} {{ usuarios.last_name}}</h1>
+{% endif %}
+<div class="slider">
+    <!-- <div>
+        <img src="{% static 'app/img/picture/pic2.jpg' %}" alt="">
+    </div> -->
+    <div>
+        <img src="https://miro.medium.com/max/2400/1*SQAgA-Eo-qnxAQ3BM-GusQ.jpeg" alt="">
+    </div>
+    <div>
+        <img src="https://beprisma.com/wp-content/uploads/2019/12/cultura-de-empresa-y-gamificacion.png" alt="">
+    </div>
+    
+    <div>
+        <img src="https://www.incimages.com/uploaded_files/image/1920x1080/getty_518871222_2000133420009280201_388806.jpg" alt="">
+    </div>
+</div>
+ {% block jQuery %}
+      <!--query-->
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+      <!-- Custom scripts -->
+      {% endblock %}
+
+{% endblock %}

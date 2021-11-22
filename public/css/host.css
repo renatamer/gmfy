@@ -1,0 +1,283 @@
+@import url('https://fonts.googleapis.com/css?family=Nunito&display=swap');
+
+:root {
+	--dark-color-a: #424559;
+	--dark-color-b: #4d5064;
+	--light-color: #f7f7f7;
+	--light-color-a: #e6e9ff;
+	--success-color: #5cb85c;
+	--error-color: #d9534f;
+
+	--first-color: #272a3a;
+    --first-color-light: #8a8eaa;
+    --first-color-lighten: #f8f8fc;
+
+    --normal-font-size: 0.7rem;
+    --smaller-font-size: 0.6rem;
+}
+
+* {
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+}
+
+body {
+	font-family: 'Nunito', sans-serif;
+	font-size: 16px;
+	background: var(--light-color);
+	margin: 20px;
+}
+
+ul {
+	list-style: none;
+	text-align: center;
+}
+
+a {
+	text-decoration: none;
+}
+
+.btn {
+	cursor: pointer;
+	padding: 5px 15px;
+	background: var(--light-color);
+	color: var(--dark-color-a);
+	border: 0;
+	font-size: 17px;	
+}
+
+#start {
+	display: none;
+}
+
+.btn-ruleta {
+	cursor: pointer;
+	padding: 5px 15px;
+	background: var(--error-color);
+	color: var(--light-color);
+	border: 0;
+	font-size: 17px;
+	margin: auto;
+	margin-top: 50px;
+    display: block;
+}
+
+
+i {
+	margin-right: 20px;
+}
+
+h2 {
+	text-align: center;
+}
+
+/* Chat Page */
+
+.chat-container {
+	max-width: 1100px;
+	background: #fff;
+	margin: 30px auto;
+	overflow: hidden;
+}
+
+.chat-header {
+	background: var(--dark-color-a);
+	color: #fff;
+	border-top-left-radius: 5px;
+	border-top-right-radius: 5px;
+	padding: 15px;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.chat-main {
+	display: grid;
+	grid-template-columns: 1fr 3fr;
+}
+
+.chat-sidebar {
+	background: var(--dark-color-b);
+	color: #fff;
+	padding: 20px 20px 60px;
+	overflow-y: scroll;
+}
+
+.chat-sidebar h2 {
+	font-size: 20px;
+	background: rgba(0, 0, 0, 0.1);
+	padding: 10px;
+	margin-bottom: 20px;
+}
+
+.chat-sidebar h3 {
+	margin-bottom: 15px;
+}
+
+.chat-sidebar ul li {
+	padding: 10px 0;
+}
+
+.chat-messages {
+	padding: 30px;
+	max-height: 500px;
+	overflow-y: scroll;
+}
+
+.chat-messages .message {
+	padding: 10px;
+	margin-bottom: 15px;
+	background-color: var(--light-color-a);
+	border-radius: 5px;
+	overflow-wrap: break-word;
+}
+
+.chat-messages .message .meta {
+	font-size: 15px;
+	font-weight: bold;
+	color: var(--dark-color-b);
+	opacity: 0.7;
+	margin-bottom: 7px;
+}
+
+.chat-messages .message .meta span {
+	color: #777;
+}
+
+.chat-form-container {
+	padding: 20px 30px;
+	background-color: var(--dark-color-a);
+}
+
+.chat-form-container form {
+	display: flex;
+}
+
+.chat-form-container input[type='text'] {
+	font-size: 16px;
+	padding: 5px;
+	height: 40px;
+	flex: 1;
+}
+
+/* Join Page */
+.join-container {
+	max-width: 500px;
+	margin: 80px auto;
+	color: #fff;
+}
+
+.join-header {
+	text-align: center;
+	padding: 20px;
+	background: var(--dark-color-a);
+	border-top-left-radius: 5px;
+	border-top-right-radius: 5px;
+}
+
+.join-main {
+	padding: 30px 40px;
+	background: var(--dark-color-b);
+}
+
+.join-main p {
+	margin-bottom: 20px;
+}
+
+.join-main .form-control {
+	margin-bottom: 20px;
+}
+
+.join-main label {
+	display: block;
+	margin-bottom: 5px;
+}
+
+.join-main input[type='text'] {
+	font-size: 16px;
+	padding: 5px;
+	height: 40px;
+	width: 100%;
+}
+
+.join-main select {
+	font-size: 16px;
+	padding: 5px;
+	height: 40px;
+	width: 100%;
+}
+
+.join-main .btn {
+	margin-top: 20px;
+	width: 100%;
+}
+
+.tamano-pequeno1{
+    height: 100px;
+    width: auto;
+    margin: auto;
+    display: block;
+}
+
+/* Player Card */
+.card,
+.data {
+    display: flex;
+    align-items: center;
+}
+
+.card {
+    width: 230px;
+    justify-content: space-around;
+    padding: 0.75rem 1.25rem 0.75rem 0.75rem;
+    background-color: var(--first-color-lighten);
+    /* box-shadow: 4px 4px 16px #e1e1e1, -2px -2px 16px #fff; */
+    border-radius: 2.5rem;
+}
+
+.cardimg {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 0.3rem;
+}
+
+.cardname {
+    font-size: var(--normal-font-size);
+    color: var(--first-color);
+    font-weight: 500;
+	text-align: center;
+}
+
+.team {
+    font-size: var(--smaller-font-size);
+    color: var(--first-color-light);
+}
+
+.centrado{  
+	margin: auto;
+	text-align:center;
+}
+
+.tamano-pequeno{
+	height: 180px;
+	width: auto;
+	margin: auto;
+	display: block;
+}
+
+#equipoact {
+	color: black;
+	font-weight: bold;
+}
+
+@media (max-width: 700px) {
+	.chat-main {
+		display: block;
+	}
+
+	.chat-sidebar {
+		display: none;
+	}
+}

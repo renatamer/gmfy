@@ -1,0 +1,312 @@
+{% extends 'app/base.html' %}
+{% load static %}
+<link rel="shortcut icon" href="{%  static 'app/favicon.ico' %}">
+{% block js %}
+  <script src="js/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+  <script src="js/scriptR4.js"></script>
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+{% endblock %}
+{% block css %}
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<script src="https://kit.fontawesome.com/d5ff9e6164.js" crossorigin="anonymous"></script>
+<style>
+    .selector-for-some-widget {
+    box-sizing: content-box;
+  }
+  .button4 {
+      background-color: #FF395B;
+      border: none;
+      color: white;
+      padding: 10px 20px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 15px;
+      border-radius: 12px;
+      
+    }
+    .button3 {
+      background-color: #F29D39;
+      border: none;
+      color: white;
+      padding: 10px 20px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 15px;
+      border-radius: 12px;
+    }
+    </style>
+{% endblock %}
+{% block contenido %}
+
+<h1 class="main-title"><i class="fas fa-bullseye"></i> ruletita test!</h1>
+<br><br>
+  <div class="container">
+    <div class="row">
+      <div class="col col-lg-3">
+        <div id="premio"><br><br>
+          <table style="margin: 0 auto;">
+            <tr>
+              <th></th>
+            </tr>      
+            <tr>
+              <td>
+                <p class="elije">La trivia escogida es: </p>
+              </td>  
+            </tr>
+          
+            <tr>
+              <td>
+                <p class="contador">TURNOS:0</p>
+              </td>
+            </tr>    
+          </table>
+      
+        </div>
+      </div>
+      <div class="col-md-auto">
+        <div class="vara"></div>
+        <div>
+          <img class="img-fluid" src="image/ruleta4x.png" id="ruleta">
+        </div>
+        <div>
+          <div id="sonido" style="display: none;">
+            <iframe id="audio" src="sonido/ruleta.mp3">
+            </iframe>      
+          </div>
+        </div>
+      
+      </div>
+      <div class="col">
+        <div class="trivias">
+          <table class="table table-striped">
+            <thead class="thead-dark ">
+              <tr>
+                <th scope="col">Icono</th>
+                <th scope="col">Trivias</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row"><i class="far fa-heart"></i></th>
+                <td>
+                  <select class="custom-select">
+                    <option selected>Seleccione trivia</option>
+                    <option value="1">Historia global</option>
+                    <option value="2">Cultura popular</option>
+                    <option value="3">Musical</option>
+                    <option value="4">Arte</option>
+                    <option value="5">Video-juegos</option>
+                    <option value="6">clasicos</option>
+                  </select>
+                </td>
+              </tr>
+              <tr>
+                <th scope="row"><i class="fas fa-search"></i></th>
+                <td>
+                  <select class="custom-select">
+                    <option selected>Seleccione trivia</option>
+                    <option value="1">Historia global</option>
+                    <option value="2">Cultura popular</option>
+                    <option value="3">Musical</option>
+                    <option value="4">Arte</option>
+                    <option value="5">Video-juegos</option>
+                    <option value="6">clasicos</option>
+                  </select>            
+                </td>
+              </tr>
+              <tr>
+                <th scope="row"><i class="fas fa-home"></i></th>
+                <td>
+                  <select class="custom-select">
+                    <option selected>Seleccione trivia</option>
+                    <option value="1">Historia global</option>
+                    <option value="2">Cultura popular</option>
+                    <option value="3">Musical</option>
+                    <option value="4">Arte</option>
+                    <option value="5">Video-juegos</option>
+                    <option value="6">clasicos</option>
+                  </select>
+                </td>
+              </tr>
+              <tr>
+                <th scope="row"><i class="far fa-paper-plane"></i></th>
+                <td>
+                  <select class="custom-select">
+                    <option selected>Seleccione trivia</option>
+                    <option value="1">Historia global</option>
+                    <option value="2">Cultura popular</option>
+                    <option value="3">Musical</option>
+                    <option value="4">Arte</option>
+                    <option value="5">Video-juegos</option>
+                    <option value="6">clasicos</option>
+                  </select>
+                </td>
+              </tr>
+              <tr>
+                <th scope="row"><button type="button" class="btn button3 btn-lg btn-block">Limpiar</button></th>
+                <td>
+                  
+                  <button type="button" class="btn button4 btn-lg btn-block">Guardar cambios</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>  
+        </div>
+      </div>
+    </div>
+  </div>
+<br><hr><br>
+  <div class="container-fluid">
+    <div class="container">
+
+      <div class="row">
+        <div class="col col-lg-3">
+          <div id="premio"><br><br>
+            <div class="center">
+              <table style="margin: 0 auto;">      
+                <tr>
+                  <td>
+                    <p class="elije">La trivia escogida es:  </p>
+                  </td>  
+                </tr>
+                <tr>
+                  <td>
+                    <p class="contador">TURNOS:0</p>
+                  </td>
+                </tr>
+              </table>
+            </div>    
+          </div>
+        </div>
+        <div class="col-md-auto"> 
+        
+          <div class="ruleta">
+            <div class="vara"></div>
+            <div>
+              <img class="img-fluid" src="image/ruleta6x.png" id="ruleta">
+            </div>
+          </div>
+          
+          <div class="sonido">
+            <div id="sonido" style="display: none;">
+              <iframe id="audio" src="sonido/ruleta.mp3">
+              </iframe>
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="trivias"> 
+            <table class="table table-striped border">
+              <thead class="thead-dark ">
+                <tr>
+                  <th scope="col">Icono</th>
+                  <th scope="col">Trivias</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th scope="row"><i class="fas fa-globe"></i></th>
+                  <td>
+                    <select class="custom-select">
+                      <option selected>Seleccione trivia</option>
+                      <option value="1">Historia global</option>
+                      <option value="2">Cultura popular</option>
+                      <option value="3">Musical</option>
+                      <option value="4">Arte</option>
+                      <option value="5">Video-juegos</option>
+                      <option value="6">clasicos</option>
+                    </select>
+                  </td>
+                </tr>
+                <tr>
+                  <th scope="row"><i class="fas fa-search"></i></th>
+                  <td>
+                    <select class="custom-select">
+                      <option selected>Seleccione trivia</option>
+                      <option value="1">Historia global</option>
+                      <option value="2">Cultura popular</option>
+                      <option value="3">Musical</option>
+                      <option value="4">Arte</option>
+                      <option value="5">Video-juegos</option>
+                      <option value="6">clasicos</option>
+                    </select>
+                  </td>
+                </tr>
+                <tr>
+                  <th scope="row"><i class="fas fa-home"></i></th>
+                  <td>
+                    <select class="custom-select">
+                      <option selected>Seleccione trivia</option>
+                      <option value="1">Historia global</option>
+                      <option value="2">Cultura popular</option>
+                      <option value="3">Musical</option>
+                      <option value="4">Arte</option>
+                      <option value="5">Video-juegos</option>
+                      <option value="6">clasicos</option>
+                    </select>
+                  </td>
+                </tr>
+                <tr>
+                  <th scope="row"><i class="far fa-paper-plane"></i></th>
+                  <td>
+                    <select class="custom-select">
+                      <option selected>Seleccione trivia</option>
+                      <option value="1">Historia global</option>
+                      <option value="2">Cultura popular</option>
+                      <option value="3">Musical</option>
+                      <option value="4">Arte</option>
+                      <option value="5">Video-juegos</option>
+                      <option value="6">clasicos</option>
+                    </select>
+                  </td>
+                </tr>
+                <tr>
+                  <th scope="row"><i class="far fa-user"></i></th>
+                  <td>
+                    <select class="custom-select">
+                      <option selected>Seleccione trivia</option>
+                      <option value="1">Historia global</option>
+                      <option value="2">Cultura popular</option>
+                      <option value="3">Musical</option>
+                      <option value="4">Arte</option>
+                      <option value="5">Video-juegos</option>
+                      <option value="6">clasicos</option>
+                    </select>
+                  </td>
+                </tr>
+                <tr>
+                  <th scope="row"> <i class="far fa-heart"></i></th>
+                  <td>
+                    <select class="custom-select">
+                      <option selected>Seleccione trivia</option>
+                      <option value="1">Historia global</option>
+                      <option value="2">Cultura popular</option>
+                      <option value="3">Musical</option>
+                      <option value="4">Arte</option>
+                      <option value="5">Video-juegos</option>
+                      <option value="6">clasicos</option>
+                    </select>
+                  </td>
+                </tr>
+                <tr>
+                  <th scope="row"><button type="button" class="btn button3 btn-lg btn-block">Limpiar</button></th>
+                  <td>
+                    
+                    <button type="button" class="btn button4 btn-lg btn-block">Guardar cambios</button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>  
+          </div>         
+        </div>        
+      </div>
+    </div>
+{% block jQuery %}
+{% endblock %}
+
+{% endblock %}

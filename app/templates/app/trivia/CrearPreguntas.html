@@ -1,0 +1,80 @@
+{% extends 'app/base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block js %}
+{% endblock %}
+{% block css %}
+{% endblock %}
+{% block contenido %}
+
+<div class="row justify-content-md-center">
+  <div class="col col-lg-3">
+    
+  </div>
+  <div class="col-md-auto"><br>
+    <h1 class="sign-up__title">Registro de Preguntas</h1><br>
+    <form class="sign-up-form form" action="" method="post" enctype="multipart/form-data">
+            
+      <div class="form-label">
+        {% csrf_token %}
+        {{ form2.tematica_id_tematica| as_crispy_field }}
+      </div>
+          <div class="row">  
+            <div class="col form-label">
+             {{ form2.Pregunta| as_crispy_field }}
+            </div>   
+            <div class="col form-label">
+             {{ form2.Tiempo| as_crispy_field }}
+            </div> 
+            <div class="col form-label">
+             {{ form2.Puntos| as_crispy_field }}
+            </div> 
+          </div>
+          &nbsp;
+          &nbsp;
+        <div class="row">
+          <div class="col form-label">
+                 {{ form2.Audio | as_crispy_field }}
+            </div>       
+          </div>
+          &nbsp;
+        <div class="row">
+          <div class="col form-label">
+                 {{ form.Alternativa | as_crispy_field }}
+              </div>   
+            <div class="col form-label">
+             {{ form.Alternativa | as_crispy_field }}
+            </div>          
+          </div>
+          &nbsp;
+        <div class="row">
+              <div class="col form-label">
+                 {{ form.Alternativa  | as_crispy_field }}
+              </div>   
+            <div class="col form-label">
+             {{ form.Alternativa | as_crispy_field }}
+            </div>          
+          </div>
+          &nbsp;
+        <div class="row">
+            <div class="col">
+              <a  href="{% url 'home' %}">
+                <input type="button" value="Cancelar" class="form-btn secondary">
+              </a>
+            </div>
+            &nbsp;
+            <div class="col">
+              <button type="submit" id="btnEnviar" class="form-btn primary-default-btn transparent-btn button4">Guardar</button>
+            </div>   
+          </div>
+    </form>
+    
+  </div>
+  <div class="col col-lg-4">
+    
+  </div>
+</div>
+
+
+
+{% endblock %}

@@ -1,0 +1,26 @@
+{
+  "name": "gamifiwork",
+  "version": "1.0.0",
+  "description": "Trivia Sincronica de Gamifiwork",
+  "main": "index.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jgallegoscarvallo/Gamifiwork.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.16.3",
+    "moment": "^2.29.1",
+    "oracledb": "^5.2.0",
+    "server": "^1.0.36",
+    "socket.io": "^2.4.1",
+    "sweetalert2": "^11.1.9"
+  },
+  "devDependencies": {
+    "expect": "^27.3.1"
+  }
+}

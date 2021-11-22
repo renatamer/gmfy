@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Juego | Gamifiwork Sincronico</title>
+        <link rel = "stylesheet" href = "../../css/playerGameView.css">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="shortcut icon" href="../img/svg/favicon.ico" type="image/x-icon">  
+        <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
+        <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+    </head>
+    <body id="cuerpo">
+        <div id = "stats">
+            <h4 id = "nameText">Nombre: </h4>
+            <h4 id = "scoreText">Puntaje: </h4>
+            <h4 id = "teamText">Equipo: </h4>
+            <h4 id = "rankText"></h4>
+        </div>
+
+        <h2 id = "message"></h2>      
+        
+   
+        
+        <table class="content-table">
+            <thead>
+                <tr>
+                    <th colspan="3">
+                        <h2>Top 5 de la partida</h2>
+                    </th>
+                </tr>
+                <tr>
+                    <th>Posición</th>
+                    <th>Nombre</th>
+                    <th>Puntos</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="active-row">
+                    <td>1. <i id="icon" class="fas fa-crown"></i></td>
+                    <td id=rankingNom1></td>
+                    <td id=rankingPtos1></td>
+                </tr>
+                <tr>
+                    <td>2.</td>
+                    <td id=rankingNom2></td>
+                    <td id=rankingPtos2></td>
+                </tr>
+                <tr>
+                    <td>3.</td>
+                    <td id=rankingNom3></td>
+                    <td id=rankingPtos3></td>
+                </tr>
+                <tr>
+                    <td>4.</td>
+                    <td id=rankingNom4></td>
+                    <td id=rankingPtos4></td>
+                </tr>
+                <tr>
+                    <td>5.</td>
+                    <td id=rankingNom5></td>
+                    <td id=rankingPtos5></td>
+                </tr>
+            </tbody>
+            <button onclick="window.location.href='../'" class="nuevo">Cerrar</button>
+        </table>
+
+        </html>
+
+        <button onclick = "answerSubmitted(1)" id = "answer1" class = "button"></button>
+        <button onclick = "answerSubmitted(2)" id = "answer2" class = "button"></button>
+        <br>
+        <button onclick = "answerSubmitted(3)" id = "answer3" class = "button"></button>
+        <button onclick = "answerSubmitted(4)" id = "answer4" class = "button"></button>
+
+
+        <script src = "../../socket.io/socket.io.js"></script>
+        <script src = "../../js/libs/jqueryLibrary.js"></script>
+        <script src = "../../js/libs/deparam.js"></script>
+        <script src = "../../js/playerGame.js"></script>
+    </body>
+</html>

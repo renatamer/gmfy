@@ -1,0 +1,363 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta name="author" content="ThemeStarz">
+
+    {% load static %}
+
+      <!-- Favicon -->
+    <link rel="shortcut icon" href="{%  static 'app/favicon.ico' %}">
+      <!-- Favicon -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito+Sans:400,500,600"> 
+    <link rel="stylesheet" href="/static/app/assets/bootstrap/css/bootstrap.min.css" type="text/css">
+    <link rel="stylesheet" href="/static/app/assets/font-awesome/css/fontawesome-all.min.css">
+    <link rel="stylesheet" href="/static/app/assets/css/magnific-popup.css">
+    <link rel="stylesheet" href="/static/app/assets/css/style.css">
+	<title>Gamifiwork - Trivias</title>
+
+</head>
+<body class="has-loading-screen ts-theme-light ts-font-color__white">
+
+    <!--*************************************************************************************************************-->
+    <!--************ MAIN SCREEN ************************************************************************************-->
+    <!--*************************************************************************************************************-->
+
+    <div class="ts-page-wrapper">
+        <div class="container">
+
+            <!--NAVIGATION ******************************************************************************************-->
+            <header id="header">
+                <nav class="navbar navbar-dark ts-separate-bg-element">
+                    <a class="navbar-brand" href="#">
+                        <img src="/static/app/assets/img/logo.png" alt="">
+                    </a>
+                    <!--end navbar-brand-->
+                    <button class="navbar-toggler ts-open-side-panel" type="button" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <!--end navbar-toggler-->
+                </nav>
+                <!--end navbar-->
+            </header>
+            <!--end #header-->
+
+            <!--CONTENT *********************************************************************************************-->
+            <main id="main-content">
+                <div class="ts-content-wrapper">
+                    <div class="row">
+                        <!--Page Title-->
+                        <div class="col-md-6">
+                            <h1>Trivias</h1>
+                            <p>
+                                ¡Pon a prueba tu conocimiento y<br>compite con otras personas en tiempo real!
+                                <br><a href="#" class="ts-text-small mr-2 ts-open-side-panel">Más información</a>
+                            </p>
+                            <form class="sign-up-form form" data-php-path="/static/app/assets/php/email.php" style="margin-right: auto; margin-left: auto; width: auto;">
+                                <div class="row">
+                                    <div class="col-md-9">
+                                        <div class="form-group">
+                                            <a href="{% url 'login' %}" class="btn btn-primary mr-2">Iniciar sesión</a>
+                                            <a href="http://localhost:3000/" class="btn btn-outline-light"><i class="fa fa-play mr-2"></i>Jugar</a>
+                                            <!-- <a href="http://52.5.26.113:3000/" class="btn btn-outline-light"><i class="fa fa-play mr-2"></i>Jugar</a> -->
+
+                                            <!-- <input type="text" hidden class="form-control" id="name" aria-describedby="name" name="name" placeholder="Escribe tu nombre" required>
+                                            <input type="number" hidden class="form-control" id="pin" aria-describedby="pin" name="pin" placeholder="Escribe el código de la sala" required>
+                                            <a href="{% url 'login' %}" hidden class="ts-text-small">...o haz click aquí para iniciar sesión.</a> -->
+                                        </div>
+                                        <!--end form-group-->
+                                    </div>
+                                    <!--end col-md-10-->
+                                    <!-- <div hidden class="col-md-4">
+                                        <button id="joinButton" type="submit" class="btn btn-primary w-100">Jugar</button>
+                                    </div> -->
+                                    <!--end col-md-2-->
+                                </div>
+                                <!--end row-->
+                            </form>
+                            <!--end ts-form-->
+                        </div>
+                        <!--end col-md-6-->
+                        <!--Count Down-->
+                        <div class="col-md-6">
+                            <div class="text-center my-4">
+                                <div class="ts-count-down" data-date="December 24, 2018 15:03:26" hidden ></div>
+                                <!--end ts-count-down-->
+                            </div>
+                        </div>
+                        <!--end col-md-6-->
+                    </div>
+                    <!--end row-->
+                </div>
+                <!--end ts-content-wrapper-->
+            </main>
+            <!--end #main-content-->
+
+            <!--FOOTER **********************************************************************************************-->
+            <footer id="footer" >
+                <div class="clearfix py-4">
+                    <div class="float-none float-sm-left">
+                        <div class="ts-social-icons">
+                            <a href="#" class="fab fa-facebook"></a>
+                            <a href="#" class="fab fa-twitter"></a>
+                            <a href="#" class="fab fa-pinterest"></a>
+                            <a href="#" class="fab fa-instagram"></a>
+                        </div>
+                    </div>
+                    <!--end social-icons-->
+                    <div class="float-none float-sm-right text-left text-sm-right ts-opacity__50">
+                        <small>© 2021 ThinkGo, Todos los Derechos Reservados</small>
+                    </div>
+                    <!--end text-left-->
+                </div>
+                <!--end clearfix-->
+            </footer>
+            <!--end #footer-->
+        </div>
+        <!--end container-->
+
+        <!--BACKGROUND **********************************************************************************************-->
+        <div class="ts-background ts-shapes-canvas position-fixed ts-separate-bg-element" data-bg-color="#FF395B">
+            <div class="ts-background-image ts-animate ts-scale" data-bg-image="/static/app/assets/img/bg/14.png" data-bg-opacity=".1"></div>
+            <div class="ts-background-image ts-animate ts-bounce" data-bg-image="/static/app/assets/img/bg/13.png"></div>
+            <div class="ts-background-image ts-animate ts-scale" data-bg-image="/static/app/assets/img/bg/12.png" data-bg-opacity=".3"></div>
+            <div class="ts-background-image ts-animate ts-scale" data-bg-image="/static/app/assets/img/bg/11.png"></div>
+            <div class="ts-background-image ts-animate ts-bounce" data-bg-image="/static/app/assets/img/bg/10.png"></div>
+            <div class="ts-background-image ts-animate ts-bounce" data-bg-image="/static/app/assets/img/bg/9.png" data-bg-opacity=".8"></div>
+            <div class="ts-background-image ts-animate ts-bounce" data-bg-image="/static/app/assets/img/bg/8.png" data-bg-opacity=".8"></div>
+            <div class="ts-background-image ts-animate ts-bounce" data-bg-image="/static/app/assets/img/bg/7.png"></div>
+            <div class="ts-background-image ts-animate ts-bounce" data-bg-image="/static/app/assets/img/bg/6.png" data-bg-opacity=".8"></div>
+            <div class="ts-background-image ts-animate" data-bg-image="/static/app/assets/img/bg/5.png" data-bg-opacity=".8"></div>
+            <div class="ts-background-image ts-animate ts-bounce" data-bg-image="/static/app/assets/img/bg/4.png"></div>
+            <div class="ts-background-image ts-animate ts-bounce" data-bg-image="/static/app/assets/img/bg/3.png" data-bg-opacity=".8"></div>
+            <div class="ts-background-image ts-animate ts-bounce" data-bg-image="/static/app/assets/img/bg/2.png"></div>
+            <div class="ts-background-image ts-animate ts-bounce" data-bg-image="/static/app/assets/img/bg/1.png" data-bg-opacity=".8"></div>
+        </div>
+        <!--end ts-background-->
+    </div>
+    <!--end ts-page-wrapper-->
+
+    <!--*************************************************************************************************************-->
+    <!--************ SIDE PANEL *************************************************************************************-->
+    <!--*************************************************************************************************************-->
+
+    <div class="ts-side-panel" data-bg-color="#F29D39">
+        <a href="#" class="ts-close-side-panel">
+            <i class="far fa-times-circle"></i>
+        </a>
+        <!--end ts-close-side-panel-->
+        <div class="container-fluid">
+            <section>
+                <div class="ts-title">
+                    <h2>¿Cómo funciona?</h2>
+                </div>
+                <!--end ts-title-->
+                <p>
+                    El creador de la partida te entregará un código que usarás para <b>unirte a una sala.</b><br>
+                    Cuando el juego comience, responde la mayor cantidad de <b>respuestas correctas</b> para ganar puntos.<br>
+                    La persona con más puntos al final de la partida<b> es el ganador.</b>
+                </p>
+                <div class="row">
+                    <div class="col-sm-6 col-xl-4">
+                        <div class="d-flex align-items-center my-3">
+                            <div class="ts-circle__md">
+                                <figure class="ts-background-image" data-bg-image="/static/app/assets/img/person-01.png"></figure>
+                            </div>
+                            <div class="ml-3">
+                                <h3 class="mb-0">Lee</h3>
+                                <h5 class="ts-opacity__50"><b>la pregunta</b></h5>
+                            </div>
+                        </div>
+                        <!--end d-flex-->
+                    </div>
+                    <!--end col-md-4-->
+                    <div class="col-sm-6 col-xl-4">
+                        <div class="d-flex align-items-center my-3">
+                            <div class="ts-circle__md">
+                                <figure class="ts-background-image" data-bg-image="/static/app/assets/img/person-02.png"></figure>
+                            </div>
+                            <div class="ml-3">
+                                <h3 class="mb-0">Piensa</h3>
+                                <h5 class="ts-opacity__50"><b>tu respuesta</b></h5>
+                            </div>
+                        </div>
+                        <!--end d-flex-->
+                    </div>
+                    <!--end col-md-4-->
+                    <div class="col-sm-6 col-xl-4">
+                        <div class="d-flex align-items-center my-3">
+                            <div class="ts-circle__md">
+                                <figure class="ts-background-image" data-bg-image="/static/app/assets/img/person-04.png"></figure>
+                            </div>
+                            <div class="ml-3">
+                                <h3 class="mb-0">Elige</h3>
+                                <h5 class="ts-opacity__50"><b>una alternativa</b></h5>
+                            </div>
+                        </div>
+                        <!--end d-flex-->
+                    </div>
+                    <!--end col-md-4-->
+                </div>
+                <!--end row-->
+            </section>
+            <!--end section-->
+            <section>
+                <div class="ts-title">
+                    <h2>Modos de juego</h2>
+                </div>
+                <!--end ts-title-->
+                <div class="row">
+                    <div class="col-md-4">
+                        <img src="/static/app/assets/img/icon-wallet-b.png" alt="" class="mw-100 mb-4" hidden>
+                        <h3>Tema libre</h3>
+                        <p>
+                            Pon a prueba tu conocimiento<br>sobre un <b>tema específico</b>
+                        </p>
+                    </div>
+                    <!--end col-md-4-->
+                    <div class="col-md-4">
+                        <img src="/static/app/assets/img/icon-cloud-b.png" alt="" class="mw-100 mb-4" hidden>
+                        <h3>Tema al azár</h3>
+                        <p>
+                            Temática aleatoria,<br><b>¿te sientes con suerte?</b>
+                        </p>
+                    </div>
+                    <!--end col-md-4-->
+                    <div class="col-md-4">
+                        <img src="/static/app/assets/img/icon-laptop-b.png" alt="" class="mw-100 mb-4" hidden>
+                        <h3>Juego por equipos</h3>
+                        <p>
+                           Suma más puntos que<br>el <b>equipo oponente</b>
+                        </p>
+                    </div>
+                    <!--end col-md-4-->
+                </div>
+                <!--end row-->
+            </section>
+            <!--end section-->
+            <section hidden>
+                <div class="ts-title">
+                    <h2>Our Mission</h2>
+                </div>
+                <!--end ts-title-->
+                <div class="row">
+                    <div class="col-md-12 col-xl-4">
+                        <p>
+                            Nam rhoncus elit ut nibh sagittis varius. Maecenas aliquam ex ut magna cursus pulvinar
+                        </p>
+                        <ul>
+                            <li>Nulla facilisi</li>
+                            <li>Donec fringilla dui</li>
+                            <li>Dapibus, ut placerat</li>
+                        </ul>
+                    </div>
+                    <!--end col-xl-4-->
+                    <div class="col-md-12 col-xl-8">
+                        <img src="/static/app/assets/img/image-01.jpg" alt="" class="mw-100" hid>
+                    </div>
+                    <!--end col-xl-8-->
+                </div>
+                <!--end row-->
+            </section>
+            <!--end section-->
+            <section hidden>
+                <div class="ts-title">
+                    <h2>Contact</h2>
+                </div>
+                <!--end ts-tile-->
+                <h3>Map</h3>
+                <div class="map ts-height__200px mb-5" id="map"></div>
+                <!--end map-->
+                <div class="row">
+                    <div class="col-xl-4">
+                        <h3>Address</h3>
+                        <address>
+                            4758 Nancy Street
+                            <br>
+                            +1 919-571-2528
+                            <br>
+                            <a href="#">hello@example.com</a>
+                        </address>
+                    </div>
+                    <!--end col-xl-4-->
+                    <div class="col-xl-8">
+                        <h3>Contact Form</h3>
+                        <form id="form-contact" class="ts-form ts-form-email ts-inputs__transparent" data-php-path="/static/app/assets/php/email.php">
+                            <div class="row">
+                                <div class="col-md-6 col-sm-6">
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" id="form-contact-name" name="name" placeholder="Your Name" required>
+                                    </div>
+                                    <!--end form-group -->
+                                </div>
+                                <!--end col-md-6 col-sm-6 -->
+                                <div class="col-md-6 col-sm-6">
+                                    <div class="form-group">
+                                        <input type="email" class="form-control" id="form-contact-email" name="email" placeholder="Your Email" required>
+                                    </div>
+                                    <!--end form-group -->
+                                </div>
+                                <!--end col-md-6 col-sm-6 -->
+                            </div>
+                            <!--end row -->
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <textarea class="form-control" id="form-contact-message" rows="6" name="message" placeholder="Your Message" required></textarea>
+                                    </div>
+                                    <!--end form-group -->
+                                </div>
+                                <!--end col-md-12 -->
+                            </div>
+                            <!--end row -->
+                            <div class="form-group clearfix">
+                                <button type="submit" class="btn float-right btn-outline-primary" id="form-contact-submit">Send a Message</button>
+                            </div>
+                            <!--end form-group -->
+                            <div class="form-contact-status"></div>
+                        </form>
+                        <!--end form-contact -->
+                    </div>
+                    <!--end col-xl-8-->
+                </div>
+                <!--end row-->
+            </section>
+            <!--end section-->
+        </div>
+        <!--end container-fluid-->
+    </div>
+    <!--end ts-side-panel-->
+
+    <!--*************************************************************************************************************-->
+    <!--************ JS SCRIPTS *************************************************************************************-->
+    <!--*************************************************************************************************************-->
+
+	<script src="/static/app/assets/js/jquery-3.3.1.min.js"></script>
+	<script src="/static/app/assets/js/popper.min.js"></script>
+	<script src="/static/app/assets/bootstrap/js/bootstrap.min.js"></script>
+    <script src="/static/app/assets/js/imagesloaded.pkgd.min.js"></script>
+    <script src="http://maps.google.com/maps/api/js?key=AIzaSyBEDfNcQRmKQEyulDN8nGWjLYPm8s4YB58"></script>
+    <script src="/static/app/assets/js/jquery.magnific-popup.min.js"></script>
+	<script src="/static/app/assets/js/jquery.countdown.min.js"></script>
+	<script src="/static/app/assets/js/jquery.validate.min.js"></script>
+	<script src="/static/app/assets/js/jquery-validate.bootstrap-tooltip.min.js"></script>
+
+    <script src="/static/app/assets/js/custom.js"></script>
+
+    <!--Google map-->
+
+    <script>
+        var latitude = 34.038405;
+        var longitude = -117.946944;
+        var markerImage = "/static/app/assets/img/map-marker.png";
+        var mapElement = "map";
+        var mapStyle = [{"featureType":"administrative","elementType":"labels.text.fill","stylers":[{"color":"#444444"}]},{"featureType":"landscape","elementType":"all","stylers":[{"color":"#f2f2f2"}]},{"featureType":"poi","elementType":"all","stylers":[{"visibility":"off"}]},{"featureType":"poi","elementType":"labels.text","stylers":[{"visibility":"off"}]},{"featureType":"road","elementType":"all","stylers":[{"saturation":-100},{"lightness":45}]},{"featureType":"road.highway","elementType":"all","stylers":[{"visibility":"simplified"}]},{"featureType":"road.arterial","elementType":"labels.icon","stylers":[{"visibility":"off"}]},{"featureType":"transit","elementType":"all","stylers":[{"visibility":"off"}]},{"featureType":"water","elementType":"all","stylers":[{"color":"#dbdbdb"},{"visibility":"on"}]}];
+        google.maps.event.addDomListener(window, 'load', simpleMap(latitude, longitude, markerImage, mapStyle, mapElement));
+
+    </script>
+
+
+</body>
+
+</html>

@@ -1,0 +1,54 @@
+* {
+    padding: 0px;
+    margin: 0px;
+    text-align: center;
+}
+
+body {
+    /* background-image: url("../image/fondo.jpg"); */
+    /* background-color: #8d2f2f; */
+}
+.vara {
+    height: 50px;
+    width: 10px;
+    background-color: rgb(87, 80, 80);
+    margin: auto;
+    position: relative;
+    top: 40px;
+    border-radius: 0px 0px 8px 8px;
+    border: 1px solid rgb(253, 253, 253);
+    border-top: 5px solid rgb(255, 255, 255);
+    z-index: 1000;
+}
+
+img {
+    z-index: 100;
+    transition: all 5s
+}
+
+#premio {
+    color: rgb(10, 10, 10);
+    position: absolute;
+    font-size: 25px;
+    font-weight: bold;
+    padding-top: 20px;
+    padding: 20px;
+    text-shadow: rgb(90, 85, 85);
+}
+
+#giros {
+    position: absolute;
+    font-size: 20px;
+    padding: 20px;
+}
+
+.boton {
+    background-color: #f29d39;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 15px;
+    border-radius: 12px;
+  }
