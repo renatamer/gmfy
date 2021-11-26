@@ -27,7 +27,7 @@
 
 {% load tailwind_filters %}
 
-<div hx-target="this" hx-swap="outerHTML" class="mt-3 py-3 px-3 bg-white shadow border border-gray-100">
+<div hx-target="this" hx-swap="outerHTML" class="mt-3 py-3 px-3 bg-white shadow border border-gray-100 nunito">
     <form method="POST">
         {% csrf_token %}
         {{ form|crispy }}

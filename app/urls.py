@@ -38,6 +38,8 @@ urlpatterns = [
     path('eliminarAvatar/<id>/', eliminarAvatar, name="eliminarAvatar"),
     path('partida/', partida, name="partida"),  
     path('PartidaResultados/', PartidaResultados, name="PartidaResultados"), 
-
+    path('VisualizarPermisos/',VisualizarPermisos, name="VisualizarPermisos"), 
+    path('VisualizarGrupos/',VisualizarGruposUsuarios, name="VisualizarGrupos"), 
+    path('AdmGruposUsuarios/',AdmGruposUsuarios, name="AdmGruposUsuarios"), 
     
 ]

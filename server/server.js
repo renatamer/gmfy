@@ -3,7 +3,7 @@ const path = require("path");
 const http = require("http");
 const express = require("express");
 const socketIO = require("socket.io");
-const moment = require('moment');
+const moment = require("moment");
 const formatMessage = require("./utils/messages");
 let user;
 let error;
@@ -20,6 +20,13 @@ var server = http.createServer(app);
 var io = socketIO(server);
 var games = new LiveGames();
 var players = new Players();
+
+//Variables equipos
+var val = 0;
+var equipo1 = 0;
+var equipo2 = 0;
+var puntaje1 = 0;
+var puntaje2 = 0;
 
 //Configuracion Oracle DB
 var oracledb = require("oracledb");
@@ -230,14 +237,18 @@ io.on("connection", (socket) => {
                 var answer1 = result.rows[0].ALTERNATIVA;
                 var answer2 = result.rows[1].ALTERNATIVA;
 
-                if (answer1 === 'Verdadero' | answer1 === 'Falso' & answer2 === 'Verdadero' | answer2 === 'Falso') {
-                  var answer3 = ''
-                  var answer4 = ''
+                if (
+                  (answer1 === "Verdadero") |
+                  ((answer1 === "Falso") & (answer2 === "Verdadero")) |
+                  (answer2 === "Falso")
+                ) {
+                  var answer3 = "";
+                  var answer4 = "";
                 } else {
                   var answer3 = result.rows[2].ALTERNATIVA;
                   var answer4 = result.rows[3].ALTERNATIVA;
                 }
-               
+
                 var tiempo = result.rows[0].TIEMPO;
                 var audio = result.rows[0].AUDIO;
 
@@ -309,14 +320,18 @@ io.on("connection", (socket) => {
                 var answer1 = result.rows[0].ALTERNATIVA;
                 var answer2 = result.rows[1].ALTERNATIVA;
 
-                if (answer1 === 'Verdadero' | answer1 === 'Falso' & answer2 === 'Verdadero' | answer2 === 'Falso') {
-                  var answer3 = ''
-                  var answer4 = ''
+                if (
+                  (answer1 === "Verdadero") |
+                  ((answer1 === "Falso") & (answer2 === "Verdadero")) |
+                  (answer2 === "Falso")
+                ) {
+                  var answer3 = "";
+                  var answer4 = "";
                 } else {
                   var answer3 = result.rows[2].ALTERNATIVA;
                   var answer4 = result.rows[3].ALTERNATIVA;
                 }
-                
+
                 var tiempo = result.rows[0].TIEMPO;
                 var audio = result.rows[0].AUDIO;
 
@@ -362,7 +377,7 @@ io.on("connection", (socket) => {
   });
 
   //Cuando el jugador se conecta por primera vez
-  socket.on("player-join", (params) => {
+  socket.on("player-join", (params, equipos) => {
     var gameFound = false; //Si se encuentra un juego con el pin proporcionado por el jugador
 
     //Para cada juego de la clase Games
@@ -372,17 +387,52 @@ io.on("connection", (socket) => {
         console.log("Jugador", params.name, "se ha conectado a la partida");
 
         var hostId = games.games[i].hostId; //Obtiene el id del anfitrion de la partida
+        var jugadores = players.getPlayers(hostId).length;
 
-        players.addPlayer(hostId, socket.id, params.name, {
-          score: 0,
-          answer: 0,
-        }); //Agrega un jugador a la partida
+        if (jugadores === 0) {
+          equipo1 = 0;
+          equipo2 = 0;
+        } //Resetea equipos
+
+        if (jugadores === 0 && val === 1) {
+          val = 0;
+        } //Resetea distribucion
+
+        if (equipos === "No") {
+          players.addPlayer(hostId, socket.id, params.name, {
+            score: 0,
+            answer: 0,
+            equipo: "Individual",
+          }); //Agrega un jugador a la partida
+        } else if (val === 0) {
+          players.addPlayer(hostId, socket.id, params.name, {
+            score: 0,
+            answer: 0,
+            equipo: "Equipo 1",
+          }); //Agrega un jugador a la partida (con equipo 1)
+          val = 1;
+          equipo1 = equipo1 + 1;
+        } else if (val === 1) {
+          players.addPlayer(hostId, socket.id, params.name, {
+            score: 0,
+            answer: 0,
+            equipo: "Equipo 2",
+          }); //Agrega un jugador a la partida (con equipo 2)
+          val = 0;
+          equipo2 = equipo2 + 1;
+        }
 
         socket.join(params.pin); //El jugador se une a la sala según el pin
 
         var playersInGame = players.getPlayers(hostId); //Obteniendo a todos los jugadores en juego
 
-        io.to(params.pin).emit("updatePlayerLobby", playersInGame); //Envío de datos del jugador anfitrión para mostrar en pantalla lobby
+        io.to(params.pin).emit(
+          "updatePlayerLobby",
+          playersInGame,
+          equipo1,
+          equipo2
+        ); //Envío de datos del jugador anfitrión para mostrar en pantalla lobby
+
         gameFound = true; //Se ha encontrado el juego
       }
     }
@@ -437,6 +487,14 @@ io.on("connection", (socket) => {
         var hostId = player.hostId; //Obtiene la id del anfitrión del juego
         var game = games.getGame(hostId); //Obtiene datos del juego con hostId
         var pin = game.pin; //Obtiene el pin del juego
+        var obtEquipo = players.getPlayer(socket.id).gameData.equipo; //Obtiene equipo al que pertenece
+
+        if (obtEquipo === "Equipo 1") {
+          equipo1 = equipo1 - 1;
+        } else if (obtEquipo === "Equipo 2") {
+          equipo2 = equipo2 - 1;
+        }
+
         console.log(
           "Jugador",
           players.getPlayer(socket.id).name,
@@ -447,7 +505,7 @@ io.on("connection", (socket) => {
           players.removePlayer(socket.id); //Elimina al jugador de la clase Players
           var playersInGame = players.getPlayers(hostId); //Obtiene los jugadores restantes en el juego
 
-          io.to(pin).emit("updatePlayerLobby", playersInGame); //Envía datos al host para actualizar la pantalla
+          io.to(pin).emit("updatePlayerLobby", playersInGame, equipo1, equipo2); //Envía datos al host para actualizar la pantalla
           socket.leave(pin); //El jugador esta saliendo de la habitacion
         }
       }
@@ -533,7 +591,7 @@ io.on("connection", (socket) => {
 
   socket.on("getScore", function () {
     var player = players.getPlayer(socket.id);
-   
+
     //RANKING PARCIAL POR RONDA
     var hostId = player.hostId;
     var playersInGame = players.getPlayers(hostId);
@@ -542,23 +600,16 @@ io.on("connection", (socket) => {
     var third = { name: "", score: 0 };
     var fourth = { name: "", score: 0 };
     var fifth = { name: "", score: 0 };
+    var primer = { equipo: "", pje: 0 };
+    var segundo = { equipo: "", pje: 0 };
 
-    for (var i = 0; i < playersInGame.length; i++) {
-        console.log(
-          playersInGame[i].name,
-          playersInGame[i].gameData.score
-        );
+      for (var i = 0; i < playersInGame.length; i++) {
+        // console.log(playersInGame[i].name, playersInGame[i].gameData.score);
         if (playersInGame[i].gameData.score >= fifth.score) {
           if (playersInGame[i].gameData.score >= fourth.score) {
-            if (
-              playersInGame[i].gameData.score >= third.score
-            ) {
-              if (
-                playersInGame[i].gameData.score >= second.score
-              ) {
-                if (
-                  playersInGame[i].gameData.score >= first.score
-                ) {
+            if (playersInGame[i].gameData.score >= third.score) {
+              if (playersInGame[i].gameData.score >= second.score) {
+                if (playersInGame[i].gameData.score >= first.score) {
                   //Primer lugar
                   fifth.name = fourth.name;
                   fifth.score = fourth.score;
@@ -586,8 +637,7 @@ io.on("connection", (socket) => {
                   third.score = second.score;
 
                   second.name = playersInGame[i].name;
-                  second.score =
-                    playersInGame[i].gameData.score;
+                  second.score = playersInGame[i].gameData.score;
                 }
               } else {
                 //Tercer lugar
@@ -614,7 +664,9 @@ io.on("connection", (socket) => {
             fifth.score = playersInGame[i].gameData.score;
           }
         }
-      }
+      }  
+
+        //calcularRankingTeam(player);
 
     io.to(socket.id).emit("Rank", {
       num1: first.name,
@@ -630,6 +682,122 @@ io.on("connection", (socket) => {
     });
     socket.emit("newScore", player.gameData.score);
   });
+
+  socket.on("getScoreTeam", function () {
+    var player = players.getPlayers(socket.id);
+
+    //RANKING PARCIAL POR RONDA
+    var game = games.getGame(socket.id);
+    var playersInGame = players.getPlayers(game.hostId);
+    var first = { name: "", score: 0 };
+    var second = { name: "", score: 0 };
+    var third = { name: "", score: 0 };
+    var fourth = { name: "", score: 0 };
+    var fifth = { name: "", score: 0 };
+    var primer = { equipo: "", pje: 0 };
+    var segundo = { equipo: "", pje: 0 };
+
+      for (var i = 0; i < playersInGame.length; i++) {
+        // console.log(playersInGame[i].name, playersInGame[i].gameData.score);
+        if (playersInGame[i].gameData.score >= fifth.score) {
+          if (playersInGame[i].gameData.score >= fourth.score) {
+            if (playersInGame[i].gameData.score >= third.score) {
+              if (playersInGame[i].gameData.score >= second.score) {
+                if (playersInGame[i].gameData.score >= first.score) {
+                  //Primer lugar
+                  fifth.name = fourth.name;
+                  fifth.score = fourth.score;
+
+                  fourth.name = third.name;
+                  fourth.score = third.score;
+
+                  third.name = second.name;
+                  third.score = second.score;
+
+                  second.name = first.name;
+                  second.score = first.score;
+
+                  first.name = playersInGame[i].name;
+                  first.score = playersInGame[i].gameData.score;
+                } else {
+                  //Segundo lugar
+                  fifth.name = fourth.name;
+                  fifth.score = fourth.score;
+
+                  fourth.name = third.name;
+                  fourth.score = third.score;
+
+                  third.name = second.name;
+                  third.score = second.score;
+
+                  second.name = playersInGame[i].name;
+                  second.score = playersInGame[i].gameData.score;
+                }
+              } else {
+                //Tercer lugar
+                fifth.name = fourth.name;
+                fifth.score = fourth.score;
+
+                fourth.name = third.name;
+                fourth.score = third.score;
+
+                third.name = playersInGame[i].name;
+                third.score = playersInGame[i].gameData.score;
+              }
+            } else {
+              //Cuarto lugar
+              fifth.name = fourth.name;
+              fifth.score = fourth.score;
+
+              fourth.name = playersInGame[i].name;
+              fourth.score = playersInGame[i].gameData.score;
+            }
+          } else {
+            //Quinto lugar
+            fifth.name = playersInGame[i].name;
+            fifth.score = playersInGame[i].gameData.score;
+          }
+        }
+      } 
+
+      calcularRankingTeam(player);
+
+    socket.emit("RankInd", {
+      num1: first.name,
+      num2: second.name,
+      num3: third.name,
+      num4: fourth.name,
+      num5: fifth.name,
+      sc1: first.score,
+      sc2: second.score,
+      sc3: third.score,
+      sc4: fourth.score,
+      sc5: fifth.score,
+    });
+
+    if(playersInGame[0].gameData.equipo !== 'Individual'){
+
+      if (puntaje1 >= puntaje2) {
+        primer.equipo = "Equipo 1";
+        primer.pje = puntaje1;
+        segundo.equipo = "Equipo 2";
+        segundo.pje = puntaje2;
+      } else if (puntaje2 >= puntaje1) {
+        primer.equipo = "Equipo 2";
+        primer.pje = puntaje2;
+        segundo.equipo= "Equipo 1";
+        segundo.pje = puntaje1;
+      }
+      
+      socket.emit("RankTeam", {
+        eq1: primer.equipo,
+        eq2: segundo.equipo, 
+        pj1: primer.pje,
+        pj2: segundo.pje,       
+      });
+    }
+  });
+  
 
   socket.on("time", function (data) {
     var time = data.time / 20;
@@ -766,9 +934,13 @@ io.on("connection", (socket) => {
                       var answer1 = result.rows[0].ALTERNATIVA;
                       var answer2 = result.rows[1].ALTERNATIVA;
 
-                      if (answer1 === 'Verdadero' | answer1 === 'Falso' & answer2 === 'Verdadero' | answer2 === 'Falso') {
-                        var answer3 = ''
-                        var answer4 = ''
+                      if (
+                        (answer1 === "Verdadero") |
+                        ((answer1 === "Falso") & (answer2 === "Verdadero")) |
+                        (answer2 === "Falso")
+                      ) {
+                        var answer3 = "";
+                        var answer4 = "";
                       } else {
                         var answer3 = result.rows[2].ALTERNATIVA;
                         var answer4 = result.rows[3].ALTERNATIVA;
@@ -879,7 +1051,7 @@ io.on("connection", (socket) => {
                             fifth.score = playersInGame[i].gameData.score;
                           }
                         }
-                      }
+                      }                     
 
                       io.to(game.pin).emit("Rank", {
                         num1: first.name,
@@ -911,6 +1083,8 @@ io.on("connection", (socket) => {
               var third = { name: "", score: 0 };
               var fourth = { name: "", score: 0 };
               var fifth = { name: "", score: 0 };
+              var primer = { equipo: "", pje: 0 };
+              var segundo = { equipo: "", pje: 0 };
 
               for (var i = 0; i < playersInGame.length; i++) {
                 console.log(
@@ -978,20 +1152,44 @@ io.on("connection", (socket) => {
                 }
               }
 
-              guardarResultado()
+              guardarResultado();
+
+              if(playersInGame[0].gameData.equipo !== 'Individual'){
+
+                if (puntaje1 >= puntaje2) {
+                  primer.equipo = "Equipo 1";
+                  primer.pje = puntaje1;
+                  segundo.equipo = "Equipo 2";
+                  segundo.pje = puntaje2;
+                } else if (puntaje2 >= puntaje1) {
+                  primer.equipo = "Equipo 2";
+                  primer.pje = puntaje2;
+                  segundo.equipo= "Equipo 1";
+                  segundo.pje = puntaje1;
+                }            
+              }
+
+              console.log('UNO', primer.equipo,primer.pje)
+              console.log('DOS', segundo.equipo,segundo.pje)
 
               io.to(game.pin).emit("GameOver", {
-                num1: first.name,
-                num2: second.name,
-                num3: third.name,
-                num4: fourth.name,
-                num5: fifth.name,
-                sc1: first.score,
-                sc2: second.score,
-                sc3: third.score,
-                sc4: fourth.score,
-                sc5: fifth.score,
+                numf1: first.name,
+                numf2: second.name,
+                numf3: third.name,
+                numf4: fourth.name,
+                numf5: fifth.name,
+                scf1: first.score,
+                scf2: second.score,
+                scf3: third.score,
+                scf4: fourth.score,
+                scf5: fifth.score,
+                eqf1: primer.equipo,
+                eqf2: segundo.equipo, 
+                pjf1: primer.pje,
+                pjf2: segundo.pje, 
               });
+
+              
             }
           }
         );
@@ -1078,94 +1276,93 @@ io.on("connection", (socket) => {
   });
 
   //Asigna id a trivia ruleta seleccionada al azar para hostear juego
-  socket.on('triviaSeleccionada', function (data) {
+  socket.on("triviaSeleccionada", function (data) {
+    var nombreTrivia = data.nombre;
 
-      var nombreTrivia = data.nombre;
-
-      oracledb.getConnection(
-        {
-          user: dbConfig.dbuser,
-          password: dbConfig.dbpassword,
-          connectString: dbConfig.connectString,
-        },
-        function (err, connection) {
-          if (err) {
-            console.error(err.message);
-            return;
-          }
-          connection.execute(
-            "select id_tematica from app_tematica where nombre = :1",
-            [nombreTrivia],
-            { outFormat: oracledb.OUT_FORMAT_OBJECT },
-            function (err, result) {
+    oracledb.getConnection(
+      {
+        user: dbConfig.dbuser,
+        password: dbConfig.dbpassword,
+        connectString: dbConfig.connectString,
+      },
+      function (err, connection) {
+        if (err) {
+          console.error(err.message);
+          return;
+        }
+        connection.execute(
+          "select id_tematica from app_tematica where nombre = :1",
+          [nombreTrivia],
+          { outFormat: oracledb.OUT_FORMAT_OBJECT },
+          function (err, result) {
+            if (err) {
+              console.error(err.message);
+              return;
+            }
+            socket.emit("startRuleta", result);
+            connection.close(function (err) {
               if (err) {
                 console.error(err.message);
-                return;
               }
-              socket.emit("startRuleta", result);
-              connection.close(function (err) {
-                if (err) {
-                  console.error(err.message);
-                }
-              });
-            }
-          );
-        }
-      );
+            });
+          }
+        );
+      }
+    );
   });
 
   //Buscar ID trivias elegidas en ruleta (4)
-  socket.on('buscarID4', function(data){
-      //console.log('buscarID:', data)
-
-      var nomTrivia1 = data.nombret1
-      var nomTrivia2 = data.nombret2
-      var nomTrivia3 = data.nombret3
-      var nomTrivia4 = data.nombret4
-
-      oracledb.getConnection(
-        {
-          user: dbConfig.dbuser,
-          password: dbConfig.dbpassword,
-          connectString: dbConfig.connectString,
-        },
-        function (err, connection) {
-          if (err) {
-            console.error(err.message);
-            return;
-          }
-          connection.execute(
-            "select id_tematica, nombre from app_tematica where nombre in (:1, :2, :3, :4)",
-            [nomTrivia1, nomTrivia2, nomTrivia3, nomTrivia4],
-            { outFormat: oracledb.OUT_FORMAT_OBJECT },
-            function (err, result) {
-              if (err) {
-                console.error(err.message);
-                return;
-              }
-              //console.log('enviarID', result.rows)
-              socket.emit("enviarID4", result);
-              connection.close(function (err) {
-                if (err) {
-                  console.error(err.message);
-                }
-              });
-            }
-          );
-        }
-      );
-  });
-
-  //Buscar ID trivias elegidas en ruleta (4)
-  socket.on('buscarID6', function(data){
+  socket.on("buscarID4", function (data) {
     //console.log('buscarID:', data)
 
-    var nomTrivia1 = data.nombret1
-    var nomTrivia2 = data.nombret2
-    var nomTrivia3 = data.nombret3
-    var nomTrivia4 = data.nombret4
-    var nomTrivia5 = data.nombret5
-    var nomTrivia6 = data.nombret6
+    var nomTrivia1 = data.nombret1;
+    var nomTrivia2 = data.nombret2;
+    var nomTrivia3 = data.nombret3;
+    var nomTrivia4 = data.nombret4;
+
+    oracledb.getConnection(
+      {
+        user: dbConfig.dbuser,
+        password: dbConfig.dbpassword,
+        connectString: dbConfig.connectString,
+      },
+      function (err, connection) {
+        if (err) {
+          console.error(err.message);
+          return;
+        }
+        connection.execute(
+          "select id_tematica, nombre from app_tematica where nombre in (:1, :2, :3, :4)",
+          [nomTrivia1, nomTrivia2, nomTrivia3, nomTrivia4],
+          { outFormat: oracledb.OUT_FORMAT_OBJECT },
+          function (err, result) {
+            if (err) {
+              console.error(err.message);
+              return;
+            }
+            //console.log('enviarID', result.rows)
+            socket.emit("enviarID4", result);
+            connection.close(function (err) {
+              if (err) {
+                console.error(err.message);
+              }
+            });
+          }
+        );
+      }
+    );
+  });
+
+  //Buscar ID trivias elegidas en ruleta (4)
+  socket.on("buscarID6", function (data) {
+    //console.log('buscarID:', data)
+
+    var nomTrivia1 = data.nombret1;
+    var nomTrivia2 = data.nombret2;
+    var nomTrivia3 = data.nombret3;
+    var nomTrivia4 = data.nombret4;
+    var nomTrivia5 = data.nombret5;
+    var nomTrivia6 = data.nombret6;
 
     oracledb.getConnection(
       {
@@ -1180,7 +1377,14 @@ io.on("connection", (socket) => {
         }
         connection.execute(
           "select id_tematica, nombre from app_tematica where nombre in (:1, :2, :3, :4, :5, :6)",
-          [nomTrivia1, nomTrivia2, nomTrivia3, nomTrivia4, nomTrivia5, nomTrivia6],
+          [
+            nomTrivia1,
+            nomTrivia2,
+            nomTrivia3,
+            nomTrivia4,
+            nomTrivia5,
+            nomTrivia6,
+          ],
           { outFormat: oracledb.OUT_FORMAT_OBJECT },
           function (err, result) {
             if (err) {
@@ -1198,52 +1402,53 @@ io.on("connection", (socket) => {
         );
       }
     );
-});
+  });
 
-function guardarResultado(){
-  var game = games.getGame(socket.id);
-  var playersInGame = players.getPlayers(game.hostId);
-  var gameid = game.gameData.gameid;
-  var numparticipantes = playersInGame.length;
-  var nomtrivia;
-  var idres;
-  var fecha = moment().locale('es').format('LLLL');
-  
-  //console.log('FUNCIONA:', fecha)
+  function guardarResultado() {
+    var game = games.getGame(socket.id);
+    var playersInGame = players.getPlayers(game.hostId);
+    var gameid = game.gameData.gameid;
+    var numparticipantes = playersInGame.length;
+    var nomtrivia;
+    var idres;
+    var fecha = moment().locale("es").format("LLLL");
 
-  oracledb.getConnection(
-    {
-      user: dbConfig.dbuser,
-      password: dbConfig.dbpassword,
-      connectString: dbConfig.connectString,
-    },
-    function (err, connection) {
-      if (err) {
-        console.error(err.message);
-        return;
-      }
-      connection.execute(
-        "select nombre from app_tematica where id_tematica = :1",
-        [gameid],
-        { outFormat: oracledb.OUT_FORMAT_OBJECT },
-        function (err, result) {
-          if (err) {
-            console.error(err.message);
-            return;
-          }
-          nomtrivia = result.rows[0].NOMBRE;
-          //console.log(nomtrivia);
+    //console.log('FUNCIONA:', fecha)
 
-          connection.execute(
-            `INSERT INTO RESULTADO (numero_participantes, trivia, fecha) VALUES (:nm, :tr, :fc)`,
-            [numparticipantes, nomtrivia, fecha], 
-            { autoCommit: true},
-            function (err) {
-              if (err) {
-                console.error(err.message);
-                return;
+    oracledb.getConnection(
+      {
+        user: dbConfig.dbuser,
+        password: dbConfig.dbpassword,
+        connectString: dbConfig.connectString,
+      },
+      function (err, connection) {
+        if (err) {
+          console.error(err.message);
+          return;
+        }
+        connection.execute(
+          "select nombre from app_tematica where id_tematica = :1",
+          [gameid],
+          { outFormat: oracledb.OUT_FORMAT_OBJECT },
+          function (err, result) {
+            if (err) {
+              console.error(err.message);
+              return;
+            }
+            nomtrivia = result.rows[0].NOMBRE;
+            //console.log(nomtrivia);
+
+            connection.execute(
+              `INSERT INTO RESULTADO (numero_participantes, trivia, fecha) VALUES (:nm, :tr, :fc)`,
+              [numparticipantes, nomtrivia, fecha],
+              { autoCommit: true },
+              function (err) {
+                if (err) {
+                  console.error(err.message);
+                  return;
+                }
               }
-            });
+            );
 
             connection.execute(
               "select id_resultado from resultado where fecha = :1",
@@ -1255,68 +1460,82 @@ function guardarResultado(){
                   return;
                 }
                 console.log(result.rows[0].ID_RESULTADO);
-                idres = result.rows[0].ID_RESULTADO;  
-            
-              for (var i = 0; i < playersInGame.length; i++) {
-                
-                guardarRanking(idres, i);
+                idres = result.rows[0].ID_RESULTADO;
 
-                } 
+                for (var i = 0; i < playersInGame.length; i++) {
+                  guardarRanking(idres, i);
+                }
               }
             );
-          connection.close(function (err) {
-            if (err) {
-              console.error(err.message);
-            }
-          });
-        }
-      );
-    }
-  );
-
-function guardarRanking(idres, i) {
-
-  var game = games.getGame(socket.id);
-  var playersInGame = players.getPlayers(game.hostId);
-
-  oracledb.getConnection(
-    {
-      user: dbConfig.dbuser,
-      password: dbConfig.dbpassword,
-      connectString: dbConfig.connectString,
-    },
-    function (err, connection) {
-      if (err) {
-        console.error(err.message);
-        return;
-      }
-      connection.execute(
-        `INSERT INTO RANKING (participante, puntos, resultado_id) VALUES (:pa, :pu, :id)`,
-        [playersInGame[i].name, playersInGame[i].gameData.score, idres], 
-        { autoCommit: true},
-        function (err) {
-          if (err) {
-            console.error(err.message);
-            return;
+            connection.close(function (err) {
+              if (err) {
+                console.error(err.message);
+              }
+            });
           }
-          connection.close(function (err) {
+        );
+      }
+    );
+  }
+
+  function guardarRanking(idres, i) {
+    var game = games.getGame(socket.id);
+    var playersInGame = players.getPlayers(game.hostId);
+
+    oracledb.getConnection(
+      {
+        user: dbConfig.dbuser,
+        password: dbConfig.dbpassword,
+        connectString: dbConfig.connectString,
+      },
+      function (err, connection) {
+        if (err) {
+          console.error(err.message);
+          return;
+        }
+        connection.execute(
+          `INSERT INTO RANKING (participante, puntos, resultado_id) VALUES (:pa, :pu, :id)`,
+          [playersInGame[i].name, playersInGame[i].gameData.score, idres],
+          { autoCommit: true },
+          function (err) {
             if (err) {
               console.error(err.message);
+              return;
             }
-          });
-        }
-      );
+            connection.close(function (err) {
+              if (err) {
+                console.error(err.message);
+              }
+            });
+          }
+        );
+      }
+    );
+  }
+
+  function calcularRankingTeam(player){
+
+    var x = 0;
+    var y = 0;
+
+    for (var i = 0; i < player.length; i++){
+
+      if(x === 0 || y === 0){
+        if (player[i].gameData.equipo === "Equipo 1") {
+          puntaje1 = player[i].gameData.score;
+          x = 1;
+        } else if (player[i].gameData.equipo === "Equipo 2") {
+          puntaje2 = player[i].gameData.score;  
+          y = 1;
+        } 
+      } else {
+        if (player[i].gameData.equipo === "Equipo 1") {
+          puntaje1 = puntaje1 + player[i].gameData.score;
+        } else if (player[i].gameData.equipo === "Equipo 2") {
+          puntaje2 = puntaje2 + player[i].gameData.score;
+        } 
+      }
     }
-  );
-}
-
-
-
-
-}
-
-
+  }
 
 });
-
-

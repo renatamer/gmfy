@@ -30,7 +30,7 @@
   <link rel="stylesheet" href="{% static 'app/css/style.min.css' %}">  
 </head>
 
-<body>
+<body class="nunito">
 <div class="layer"></div> 
 <!-- ! Body -->
 
@@ -98,12 +98,12 @@
                       </span>
                   </a>
                   <ul class="cat-sub-menu">
-                      <li>
+<!--                       <li>
                           <a class="nunito" href="{% url 'page1' %}">Resultado general</a>
                       </li>
                       <li>
                           <a class="nunito" href="{% url 'page1' %}">Resultado por trivia</a>
-                      </li>
+                      </li> -->
                        <li>
                           <a class="nunito" href="{% url 'PartidaResultados' %}">Resultados</a>
                       </li>
@@ -175,8 +175,8 @@
       </div> -->
     </div>
         <div class="main-nav-end">
-      <div>
-      <a href="##">{{ user }}</a>
+      <div >
+      <a href="##" class="main-title nunito" style="font-size: 20px;">{{ user }}</a>
       </div>
       <button class="sidebar-toggle transparent-btn" title="Menu" type="button">
         <span class="sr-only">sup-menu</span>

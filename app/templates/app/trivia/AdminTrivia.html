@@ -142,11 +142,11 @@
 {% endblock %}
 {% block contenido %}
 <div>
-<h1 class="main-title">Administrar Trivias  <div class="derecha">
+<h1 class="main-title nunito" style="font-size: 40px;">Administrar Trivias  <div class="derecha">
     <a  href="{% url 'RegistroTrivia' %}"><button class="button4"><i class="fas fa-plus-circle"></i>&nbsp;&nbsp;&nbsp;Agregar nueva Trivia</button></h1></div></a>
 <div>    
 </div>
-    <table>
+    <table class="nunito">
         <thead>
             <tr>
               <th>ID</th>
@@ -175,18 +175,18 @@
 
 <br>
 
-<div class="centrado">
+<div class="centrado nunito">
     <ul class="pagination">
         {% include 'app/paginator.html' %}
     </ul>
 </div>
 <br>
 
-<form method="get" class="derecha form" style="margin-left: 5%; margin-right: 5%;">
+<form method="get" class="derecha form nunito " style="margin-left: 5%; margin-right: 5%;">
     <div class="form-label justify-content-md-center">
         
         <div class="col form-label">
-            <h3><strong>Herramienta de filtro:</strong></h3>
+            <h3><strong style="font-size: 20px;">Herramienta de filtro:</strong></h3>
             {{ filtered_Tematica.form.as_p }}
         </div>
      

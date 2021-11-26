@@ -238,18 +238,39 @@ class AuthGroupForm(forms.ModelForm):
     class Meta:
         model = AuthGroup
         fields = ["name"]
+
+class AppAuthUserGroupsForm(forms.ModelForm):
+    
+    auth_user = forms.ModelChoiceField(
+        label='Usuario', 
+        empty_label="(Seleccione un usuario",
+        queryset=AppAuthUser.objects.all(), 
+        widget=forms.Select()       
+    )
+    
+    group = forms.ModelChoiceField(
+        label='Grupo', 
+        empty_label="(Seleccione un grupo)",
+        queryset=AuthGroup.objects.all(), 
+        widget=forms.Select()       
+    )
+    
+
+    class Meta:
+        model = AppAuthUserGroups
+        fields = "__all__"
         
 class AuthGroupPermissionsform(forms.ModelForm):
    
     group = forms.ModelChoiceField(
-        label='Trivia', 
+        label='Grupo', 
         empty_label="(Seleccione un grupo)",
         queryset=AuthGroup.objects.all(), 
         widget=forms.Select()       
     )
     
     permission = forms.ModelChoiceField(
-        label='Trivia', 
+        label='Permiso', 
         empty_label="(Seleccione un permiso)",
         queryset=AuthPermission.objects.all(), 
         widget=forms.Select()       

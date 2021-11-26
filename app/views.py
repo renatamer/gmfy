@@ -13,7 +13,7 @@ from django.http.response import Http404, HttpResponse, HttpResponseNotAllowed
 from django.shortcuts import render, redirect, get_object_or_404
 
 from app.filters import AppAuthUserFilter, RankingFilter, PreguntaFilter, AvatarFilter, TematicaFilter
-from app.forms import AlternativaFormSet, AuthGroupPermissionsform
+from app.forms import AlternativaFormSet, AppAuthUserGroupsForm, AuthGroupPermissionsform
 #from accounts.forms import UserAdminCreationForm
 from app.models import AppAuthUser, Auth_User, AuthGroup, Pregunta, Ranking, Tematica, Alternativa, Avatar
 
@@ -77,7 +77,7 @@ def PartidaResultados(request):
     )
     
     data['filtered_ranking'] = filtered_ranking
-    paginated_filtered_Ranking = Paginator(filtered_ranking.qs, 5)
+    paginated_filtered_Ranking = Paginator(filtered_ranking.qs, 50)
     page_number = request.GET.get('page', 1)
     page_obj = paginated_filtered_Ranking.get_page(page_number)
     data['page_obj'] = page_obj
@@ -462,6 +462,32 @@ def AsignarPermisosGrupos(request):
             data["form"] = formregistro
    
     return render(request,'app/usuario/AsignarPermisosGrupos.html', data)
+
+
+@login_required()
+def AdmGruposUsuarios(request):
+    data = {
+        'form': AppAuthUserGroupsForm()
+        
+    }
+
+    if request.method == 'POST':
+        formregistro = AppAuthUserGroupsForm(data=request.POST) 
+        if formregistro.is_valid():
+            formregistro.save()
+            messages.success(request,"Agregado correctamente")
+            return redirect(to="VisualizarGrupos")
+        else:
+            data["form"] = formregistro
+   
+    return render(request,'app/usuario/AdmGruposUsuarios.html', data)
+
+
+
+
+
+
+
     
 def landing(request):
 
@@ -550,3 +576,46 @@ def listarAvatar(request):
 def partida(request):
     return render(request,'app/partida/partida.html') 
 
+@login_required()
+def VisualizarPermisos(request):
+    grupo = request.GET.get('grupo')
+    data ={
+        'grupo':VisualizarGrupos(),    
+    } 
+    return render(request,'app/usuario/VisualizarPermisos.html', data)
+
+
+def VisualizarGrupos():
+    django_cursor = connection.cursor()
+    cursor = django_cursor.connection.cursor()
+    out_cur = django_cursor.connection.cursor()
+    
+    cursor.callproc("PR_LISTAR_GRUPOS_PERMISOS",[out_cur])
+    
+    
+    lista = []
+    for fila in out_cur:
+        lista.append(fila)
+    return lista
+
+@login_required()
+def VisualizarGruposUsuarios(request):
+    usuarios = request.GET.get('usuarios')
+    data ={
+        'usuarios':VisualizarUsuarios(),    
+    } 
+    return render(request, 'app/usuario/VisualizarGrupos.html', data)
+
+
+def VisualizarUsuarios():
+    django_cursor = connection.cursor()
+    cursor = django_cursor.connection.cursor()
+    out_cur = django_cursor.connection.cursor()
+    
+    cursor.callproc("PR_LISTAR_USUARIOS_GRUPOS",[out_cur])
+    
+    
+    lista = []
+    for fila in out_cur:
+        lista.append(fila)
+    return lista

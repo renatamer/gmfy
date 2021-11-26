@@ -29,7 +29,7 @@
 
 
 
-<div class="md:flex md:items-center md:justify-between">
+<div class="md:flex md:items-center md:justify-between nunito">
     <div class="flex-1 min-w-0">
         <h2 class="main-title text-2xl font-bold leading-7 text-gray-900 sm:text-3xl sm:truncate">
             Pregunta {{ pregunta.preg_orden }}: <br>
@@ -44,9 +44,9 @@
     </div>
 </div>
 
-<div id="alternativaforms" class="py-5 mt-5"></div>
+<div id="alternativaforms" class="py-5 mt-5 nunito"></div>
 
-<div class="mt-5 py-5 border-t border-gray-100">
+<div class="mt-5 py-5 border-t border-gray-100 nunito">
     {% for alternativa in alternativa %}
 
     {% include "app/trivia/partials/alternativa_detalle.html" %}

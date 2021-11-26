@@ -29,11 +29,15 @@
 {% endblock %}
 {% block css %}
 <style>
+    .nunito{font-family:'Nunito',sans-serif} 
     #main-container {
         margin: 150px auto;
         width: 600px;
       }
-    
+    .imagen{
+        width: 50px;
+        height: 50px;
+    }
       table {
         align-items: left;
         background-color: white;
@@ -139,84 +143,86 @@
     }
     
     ul.pagination li a:hover:not(.active) {background-color: #ddd;}
-</style>
+    </style>
 {% endblock %}
 {% block contenido %}
-<div>
 
-<h1 class="main-title">Administrar Usuarios  <div class="derecha">
-    <a  href="{% url 'registroUsuario' %}"><button class="button4">Agregar nuevo usuario</button>
-    <a  href="{% url 'AdministrarGrupos' %}"><button class="button4">Asignar grupos</button></h1></div></a>
-
-<div>
-
-
-    <table>
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Nombre</th>
-                <th>Rol</th>
-                <th>Correo</th>
-                <th>Avatar</th>
-                <th>Fecha Registro</th>
-                <th>Estado</th>
-                <th>Acción</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for u in page_obj %}
-            <tr>
-                <td data-titulo="ID">{{ u.id }}</td>
-                <td data-titulo="Nombre">{{ u.first_name | title }} {{ u.last_name | title  }}</td>
-                <td data-titulo="Rol"> </td>
-                <td data-titulo="Correo">{{ u.email }}</td>
-                {% if u.avatar %}
-                <td data-titulo="Avatar"><img src='{{u.avatar.url }}' alt="" class="img-fluid  user_imag rounded-circle"
-                        width="50px"></td>
-                {% else %}
-                <td data-titulo="Avatar"><img src="{% static '/app/img/avatar/no-image.png' %}" class="no-imagen" alt=""
-                        width="50px"></td>
-                {% endif %}
-                <td data-titulo="Fecha Registro">{{ u.date_joined }}</td>
-                <td data-titulo="Estado">
-                    {% if u.is_active %}
-                    Activo
-                    {% else %}
-                    Inactivo
-                    {% endif %}
-                </td>
-                <td class="centrado">
-                    <a href="{% url 'modificarUsuario' u.id %}" class="fas fa-edit colorx"></a>
-                    <a href="#" onclick="eliminar({{ u.id }})" class="fas fa-trash colorx"></a>
-                </td>
-
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
-</div>
-<br>
-</div>
-<div class="centrado">
-    <ul class="pagination">
-        {% include 'app/paginator.html' %}
-    </ul>
-</div><br>
-
-<div class="card">
-
-    <form method="get" class="derecha sign-up-form form" style="margin-right: 5%; margin-left: 5%;">
-        <div class="form-label justify-content-md-center">
-            <div class="col form-label ">
-                <h3><strong>Herramienta de filtro:</strong></h3>
-                {{ filtered_AppAuthUser.form.as_p }}
-            </div>
-
-            <div class="derecha">
-                <input type="submit" value="Buscar" class="form-btn button4" style="padding: 3px; border-radius: 20px;">
-            </div>
+    <h1 class="main-title" style="font-size: 40px;">Administrar Usuarios  
+        <div class="derecha">
+            <a href="{% url 'registroUsuario' %}"><button class="button4"><i class="fas fa-user-plus"></i>&nbsp;&nbsp;&nbsp;Agregar nuevo usuario</button>
+            <a href="{% url 'AdministrarGrupos' %}"><button class="button4"><i class="fas fa-users-cog"></i>&nbsp;&nbsp;&nbsp;Asignar grupos</button></h1>
         </div>
-    </form>
+     
+    <br>
+        <table class="nunito">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nombre</th>
+                    <th>Rol</th>
+                    <th>Correo</th>
+                    <th>Avatar</th>
+                    <th>Fecha Registro</th>
+                    <th>Estado</th>
+                    <th>Acción</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for u in page_obj %}
+                <tr>
+                    <td data-titulo="ID">{{ u.id }}</td>
+                    <td data-titulo="Nombre">{{ u.first_name | title }} {{ u.last_name | title  }}</td>
+                    <td data-titulo="Rol"> </td>
+                    <td data-titulo="Correo">{{ u.email }}</td>
+                    {% if u.avatar %}
+                    <td data-titulo="Avatar"><img src='{{u.avatar.url }}' alt="" class="img-fluid  user_imag rounded-circle"
+                            width="50px"></td>
+                    {% else %}
+                    <td data-titulo="Avatar"><img src="{% static '/app/img/avatar/no-image.png' %}" class="no-imagen" alt=""
+                            width="50px"></td>
+                    {% endif %}
+                    <td data-titulo="Fecha Registro">{{ u.date_joined }}</td>
+                    <td data-titulo="Estado">
+                        {% if u.is_active %}
+                        Activo
+                        {% else %}
+                        Inactivo
+                        {% endif %}
+                    </td>
+                    <td class="centrado">
+                        <a href="{% url 'modificarUsuario' u.id %}" class="fas fa-edit colorx"></a>
+                        <a href="#" onclick="eliminar({{ u.id }})" class="fas fa-trash colorx"></a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    <br>
+    <div class="centrado nunito">
+        <ul class="pagination ">
+            {% include 'app/paginator.html' %}
+        </ul>
+    </div><br>
+    <div class="card">
+        <form method="get" class="derecha sign-up-form form " style="margin-right: 5%; margin-left: 5%;">
+            <div class="form-label justify-content-md-center">
+                <div class="col form-label" >
+                    <h3><strong style="font-size: 20px;">Herramienta de filtro:</strong></h3>
+                    {{ filtered_AppAuthUser.form.as_p }}
+                </div>
+    
+                <div class="derecha">
+                    <input type="submit" value="Buscar" class="form-btn button4" style="padding: 3px; border-radius: 20px;">
+                </div>
+            </div>
+        </form>
+    </div>
+    
 </div>
+
+
+    
+
+
+
 {% endblock %}

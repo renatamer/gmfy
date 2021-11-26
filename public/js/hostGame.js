@@ -75,42 +75,32 @@ socket.on('questionOver', function(playerData, correct){
     
     //Muestra la respuesta correcta del usuario con efectos en los elementos.
     if(correct == 1){
-  /*       document.getElementById('answer2').style.filter = "grayscale(50%)";
+        document.getElementById('answer2').style.filter = "grayscale(50%)";
         document.getElementById('answer3').style.filter = "grayscale(50%)";
         document.getElementById('answer4').style.filter = "grayscale(50%)";
         var current = document.getElementById('answer1').innerHTML;
-        document.getElementById('answer1').innerHTML = "&#10004" + " " + current; */
-        document.getElementById('answer2').style.display = "none";
-        document.getElementById('answer3').style.display = "none";
-        document.getElementById('answer4').style.display = "none";
+        document.getElementById('answer1').innerHTML = "&#10004" + " " + current;
 
     }else if(correct == 2){
-/*         document.getElementById('answer1').style.filter = "grayscale(50%)";
+        document.getElementById('answer1').style.filter = "grayscale(50%)";
         document.getElementById('answer3').style.filter = "grayscale(50%)";
         document.getElementById('answer4').style.filter = "grayscale(50%)";
         var current = document.getElementById('answer2').innerHTML;
-        document.getElementById('answer2').innerHTML = "&#10004" + " " + current; */
-        document.getElementById('answer1').style.display = "none";
-        document.getElementById('answer3').style.display = "none";
-        document.getElementById('answer4').style.display = "none";
+        document.getElementById('answer2').innerHTML = "&#10004" + " " + current;
+
     }else if(correct == 3){
-/*         document.getElementById('answer1').style.filter = "grayscale(50%)";
+        document.getElementById('answer1').style.filter = "grayscale(50%)";
         document.getElementById('answer2').style.filter = "grayscale(50%)";
         document.getElementById('answer4').style.filter = "grayscale(50%)";
         var current = document.getElementById('answer3').innerHTML;
-        document.getElementById('answer3').innerHTML = "&#10004" + " " + current; */
-        document.getElementById('answer1').style.display = "none";
-        document.getElementById('answer2').style.display = "none";
-        document.getElementById('answer4').style.display = "none";
+        document.getElementById('answer3').innerHTML = "&#10004" + " " + current;
+
     }else if(correct == 4){
-/*         document.getElementById('answer1').style.filter = "grayscale(50%)";
+        document.getElementById('answer1').style.filter = "grayscale(50%)";
         document.getElementById('answer2').style.filter = "grayscale(50%)";
         document.getElementById('answer3').style.filter = "grayscale(50%)";
         var current = document.getElementById('answer4').innerHTML;
-        document.getElementById('answer4').innerHTML = "&#10004" + " " + current; */
-        document.getElementById('answer1').style.display = "none";
-        document.getElementById('answer2').style.display = "none";
-        document.getElementById('answer3').style.display = "none";
+        document.getElementById('answer4').innerHTML = "&#10004" + " " + current;
     }
     
     for(var i = 0; i < playerData.length; i++){

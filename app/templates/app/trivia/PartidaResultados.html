@@ -78,16 +78,28 @@
 }
 .derecha{text-align: right;padding: 0%;}
 .button4 {
-background-color: #FF395B; 
-  border: none;
-  color: white;
-  padding: 10px 20px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 15px;
-  border-radius: 12px;
-}
+    background-color: #FF395B;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 15px;
+    border-radius: 12px;
+    
+  }
+  .button3 {
+    background-color: #F29D39;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 15px;
+    border-radius: 12px;
+  }
 
 /*paginación*/
 ul.pagination {
@@ -193,17 +205,7 @@ ul.pagination li a:hover:not(.active) {background-color: #ddd;}
             }
     }
     .derecha{text-align: right;padding: 0%;}
-    .button4 {
-    background-color: #FF395B; 
-      border: none;
-      color: white;
-      padding: 10px 20px;
-      text-align: center;
-      text-decoration: none;
-      display: inline-block;
-      font-size: 15px;
-      border-radius: 12px;
-    }
+   
     
     /*paginación*/
     ul.pagination {
@@ -243,7 +245,6 @@ ul.pagination li a:hover:not(.active) {background-color: #ddd;}
             <tr>
               <th>Participante</th>
               <th>Puntos</th>
-               <th>ID</th>
                <th></th>
                 
             </tr>
@@ -253,7 +254,7 @@ ul.pagination li a:hover:not(.active) {background-color: #ddd;}
             <tr>
                 <td data-titulo="Participante">{{ r.participante}}</td>
                 <td data-titulo="Puntos">{{ r.puntos}}</td>
-                <td data-titulo="ID_resultado">{{ r.resultado_id }}</td>
+          
                 <td>
                   
                 </td>
